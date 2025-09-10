@@ -47,8 +47,9 @@ export default function TabBarItem({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
     paddingVertical: 13,
+    paddingBottom: 16,
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
