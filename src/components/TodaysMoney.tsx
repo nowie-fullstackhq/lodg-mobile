@@ -15,9 +15,21 @@ export default function TodaysMoney() {
   const [isVisible, setIsVisible] = useState(true);
 
   const slides = [
-    { id: 0, amount: "₱53,036.74" },
-    { id: 1, amount: "₱123,456.78" },
-    { id: 2, amount: "₱67,890.00" },
+    {
+      id: 0,
+      title: "Amount deducted for tax",
+      amount: "₱53,036.74",
+    },
+    {
+      id: 1,
+      title: "Total expense claimed",
+      amount: "₱174,818.35",
+    },
+    {
+      id: 2,
+      title: "Total income",
+      amount: "₱26,128.28",
+    },
   ];
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -37,7 +49,7 @@ export default function TodaysMoney() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Amount deducted for tax</Text>
+        <Text style={styles.headerText}>{slides[currentSlide].title}</Text>
         <TouchableOpacity
           style={styles.eyeButton}
           onPress={toggleVisibility}
