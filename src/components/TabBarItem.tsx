@@ -1,4 +1,10 @@
-import { Image, type ImageSourcePropType, Text, View } from "react-native";
+import {
+  Image,
+  type ImageSourcePropType,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 interface TabBarItemProps {
   source: ImageSourcePropType;
@@ -13,47 +19,57 @@ export default function TabBarItem({
 }: TabBarItemProps) {
   return (
     <View
-      style={{
-        backgroundColor: focused ? "#2256cb" : "transparent",
-        paddingHorizontal: 22,
-        paddingVertical: 13,
-        borderRadius: 8,
-        alignItems: "center",
-        justifyContent: "center",
-        minWidth: 70,
-      }}
+      style={[
+        styles.container,
+        { backgroundColor: focused ? "#2256cb" : "transparent" },
+      ]}
     >
       <View
-        style={{
-          backgroundColor: focused ? "#ffffff" : "transparent",
-          padding: 8,
-          borderRadius: 6,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        style={[
+          styles.iconContainer,
+          { backgroundColor: focused ? "#ffffff" : "transparent" },
+        ]}
       >
         <Image
           source={source}
-          style={{
-            width: 15,
-            height: 15,
-            tintColor: "#2256cb",
-          }}
+          style={styles.icon}
         />
       </View>
       <Text
         numberOfLines={1}
-        style={{
-          fontSize: 8.5,
-          fontWeight: "700",
-          marginTop: 6,
-          color: focused ? "#ffffff" : "#888888",
-          fontFamily: "PlusJakartaSans",
-          textAlign: "center",
-        }}
+        style={[styles.title, { color: focused ? "#ffffff" : "#888888" }]}
       >
         {title}
       </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 13,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 70,
+  },
+  iconContainer: {
+    padding: 8,
+    borderRadius: 6,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    width: 15,
+    height: 15,
+    tintColor: "#2256cb",
+  },
+  title: {
+    fontSize: 8.5,
+    fontWeight: "700",
+    marginTop: 6,
+    fontFamily: "PlusJakartaSans",
+    textAlign: "center",
+  },
+});
