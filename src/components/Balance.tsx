@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-export default function TodaysMoney() {
+export default function Balance() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 

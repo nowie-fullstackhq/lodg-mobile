@@ -2,14 +2,14 @@ import { ScrollView, View } from "react-native";
 import Button from "@/components/Button";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
-import TodaysMoney from "@/components/TodaysMoney";
+import Balance from "@/components/Balance";
 
 export default function HomeScreen() {
   return (
     <View>
       <View style={{ backgroundColor: "#f6f6f6", paddingHorizontal: 24 }}>
         <Header username="John Doe" />
-        <TodaysMoney />
+        <Balance />
         <View
           style={{
             marginTop: 20,
