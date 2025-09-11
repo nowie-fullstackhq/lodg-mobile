@@ -3,7 +3,7 @@ import Balance from "@/components/Balance";
 import Button from "@/components/Button";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
-import TransactionList from "@/components/TransactionList";
+import List from "@/components/Invoice/List";
 import { invoices } from "@/mock/invoices";
 
 export default function HomeScreen() {
@@ -62,11 +62,7 @@ export default function HomeScreen() {
         />
       </ScrollView>
       <View style={{ backgroundColor: "#f6f6f6", paddingHorizontal: 24 }}>
-        <TransactionList
-          title="Invoices"
-          onPress={() => {}}
-          data={invoices}
-        />
+        <List data={invoices} />
       </View>
     </ScrollView>
   );

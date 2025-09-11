@@ -1,13 +1,13 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import type { InvoiceStatus } from "@/types";
 
-interface TransactionStatusBadgeProps {
+interface InvoiceStatusBadgeProps {
   status: InvoiceStatus;
 }
 
-export default function TransactionStatusBadge({
+export default function InvoiceStatusBadge({
   status,
-}: TransactionStatusBadgeProps) {
+}: InvoiceStatusBadgeProps) {
   const getStatusConfig = () => {
     switch (status) {
       case "paid":

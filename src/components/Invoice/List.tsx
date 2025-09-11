@@ -1,39 +1,25 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import TransactionItem from "@/components/TransactionItem";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import type { InvoiceData } from "@/types";
+import TransactionListHeader from "../TransactionListHeader";
+import Item from "./Item";
 
-interface TransactionListProps {
-  title: string;
-  onPress: () => void;
+interface ListProps {
   data: InvoiceData[];
 }
 
-export default function TransactionList({
-  title,
-  onPress,
-  data,
-}: TransactionListProps) {
+export default function List({ data }: ListProps) {
   return (
     <View>
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity onPress={onPress}>
-          <Text style={styles.buttonText}>See all</Text>
-        </TouchableOpacity>
-      </View>
+      <TransactionListHeader
+        title="Invoices"
+        onPress={() => {}}
+      />
       <View style={{ marginBottom: 40 }}>
         {data.length > 0 ? (
           <FlatList
             data={data}
             renderItem={({ item }) => (
-              <TransactionItem
+              <Item
                 key={item.id}
                 invoice={item}
               />

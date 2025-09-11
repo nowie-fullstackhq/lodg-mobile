@@ -1,21 +1,27 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Avatar from "./Avatar";
 
 interface HeaderProps {
   username: string;
 }
 
 export default function Header({ username }: HeaderProps) {
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map(word => word.charAt(0))
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   const firstName = username.split(" ")[0];
+  const initials = getInitials(username);
 
   return (
     <View style={styles.container}>
       <View style={styles.userInfoContainer}>
-        <View style={styles.avatarContainer}>
-          <Avatar
-            username={username}
-            hasAvatar={false}
-          />
+        <View style={styles.avatarCircle}>
+          <Text style={styles.initialsText}>{initials}</Text>
         </View>
 
         <View style={styles.greetingContainer}>
@@ -46,8 +52,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  avatarContainer: {
+  avatarCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 25,
+    backgroundColor: "#2256cb",
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 12,
+  },
+  initialsText: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "bold",
+    fontFamily: "PlusJakartaSans",
   },
   greetingContainer: {
     flex: 1,

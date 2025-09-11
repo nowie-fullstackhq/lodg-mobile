@@ -1,27 +1,25 @@
 import { StyleSheet, View } from "react-native";
 import type { InvoiceData } from "@/types";
+import Amount from "./Amount";
 import Avatar from "./Avatar";
-import TransactionAmount from "./TransactionAmount";
-import TransactionDetails from "./TransactionDetails";
+import Details from "./Details";
 
-interface TransactionItemProps {
+interface ItemProps {
   invoice: InvoiceData;
 }
 
-export default function TransactionItem({ invoice }: TransactionItemProps) {
+export default function Item({ invoice }: ItemProps) {
   return (
     <View style={styles.container}>
       <Avatar
         username={invoice.clientName}
         hasAvatar={invoice.hasAvatar}
-        backgroundColor="#F0F7FE"
-        textColor="#2256CB"
       />
-      <TransactionDetails
+      <Details
         clientName={invoice.clientName}
         date={invoice.date}
       />
-      <TransactionAmount
+      <Amount
         amount={invoice.amount}
         currency={invoice.currency}
         status={invoice.status}
