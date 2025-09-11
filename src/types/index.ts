@@ -9,3 +9,27 @@ export interface InvoiceData {
   status: InvoiceStatus;
   hasAvatar: boolean;
 }
+
+export type ExpenseStatus = "approved" | "declined" | "pending";
+
+export type ExpenseType =
+  | "gift"
+  | "water"
+  | "donation"
+  | "web"
+  | "reimbursement"
+  | "mortgage"
+  | "rent";
+
+export type ExpenseCategory = "business" | "donation" | "reimbursement";
+
+export interface ExpenseData {
+  id: string;
+  title: string;
+  amount: string;
+  currency: string;
+  date: string;
+  type: ExpenseType;
+  category: ExpenseCategory;
+  status: ExpenseStatus;
+}

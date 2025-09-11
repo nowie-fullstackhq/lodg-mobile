@@ -1,18 +1,18 @@
 import { FlatList, View } from "react-native";
-import type { InvoiceData } from "@/types";
+import type { ExpenseData } from "@/types";
 import NoData from "../NoData";
 import TransactionListHeader from "../TransactionListHeader";
 import Item from "./Item";
 
 interface ListProps {
-  data: InvoiceData[];
+  data: ExpenseData[];
 }
 
 export default function List({ data }: ListProps) {
   return (
     <View>
       <TransactionListHeader
-        title="Invoices"
+        title="Expenses"
         onPress={() => {}}
       />
       <View style={{ marginBottom: 40 }}>
@@ -22,7 +22,7 @@ export default function List({ data }: ListProps) {
             renderItem={({ item }) => (
               <Item
                 key={item.id}
-                invoice={item}
+                expense={item}
               />
             )}
             keyExtractor={item => item.id}
