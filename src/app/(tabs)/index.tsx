@@ -1,12 +1,14 @@
 import { ScrollView, View } from "react-native";
+import Balance from "@/components/Balance";
 import Button from "@/components/Button";
 import DashboardCard from "@/components/DashboardCard";
 import Header from "@/components/Header";
-import Balance from "@/components/Balance";
+import TransactionList from "@/components/TransactionList";
+import { invoices } from "@/mock/invoices";
 
 export default function HomeScreen() {
   return (
-    <View>
+    <ScrollView style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#f6f6f6", paddingHorizontal: 24 }}>
         <Header username="John Doe" />
         <Balance />
@@ -59,6 +61,13 @@ export default function HomeScreen() {
           variant="dark"
         />
       </ScrollView>
-    </View>
+      <View style={{ backgroundColor: "#f6f6f6", paddingHorizontal: 24 }}>
+        <TransactionList
+          title="Invoices"
+          onPress={() => {}}
+          data={invoices}
+        />
+      </View>
+    </ScrollView>
   );
 }

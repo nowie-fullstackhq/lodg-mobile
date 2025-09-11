@@ -1,0 +1,47 @@
+import { StyleSheet, Text, View } from "react-native";
+import type { InvoiceStatus } from "@/types";
+import TransactionStatusBadge from "./TransactionStatusBadge";
+
+interface TransactionAmountProps {
+  amount: string;
+  currency: string;
+  status: InvoiceStatus;
+}
+
+export default function TransactionAmount({
+  amount,
+  currency,
+  status,
+}: TransactionAmountProps) {
+  return (
+    <View>
+      <View style={styles.amountContainer}>
+        <Text style={styles.amount}>{amount}</Text>
+        <Text style={styles.currency}>{currency}</Text>
+      </View>
+      <TransactionStatusBadge status={status} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  amountContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: 8,
+    paddingBottom: 4,
+  },
+  amount: {
+    fontFamily: "PlusJakartaSans",
+    fontWeight: "700",
+    fontSize: 14,
+    color: "#222529",
+  },
+  currency: {
+    fontFamily: "PlusJakartaSans",
+    fontWeight: "700",
+    fontSize: 14,
+    color: "#222529",
+  },
+});
