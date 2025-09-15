@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Dimensions,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
   ScrollView,
@@ -9,6 +10,8 @@ import {
   View,
 } from "react-native";
 import EyeIcon from "./icons/EyeIcon";
+
+const { width } = Dimensions.get("window");
 
 export default function Balance() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   slide: {
-    width: 327,
+    width: width - 48,
     alignItems: "flex-start",
   },
   amountText: {

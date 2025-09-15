@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import {
   type ColorValue,
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,6 +17,8 @@ import Svg, {
   Use,
 } from "react-native-svg";
 import RightCaretCircleIcon from "./icons/RightCaretCircleIcon";
+
+const { width } = Dimensions.get("window");
 
 interface DashboardCardProps {
   title: string;
@@ -84,8 +87,8 @@ export default function DashboardCard({
 
 const styles = StyleSheet.create({
   container: {
-    width: 327,
-    height: 180,
+    width: width - 48,
+    height: 185,
     borderRadius: 14,
     position: "relative",
     overflow: "hidden",
