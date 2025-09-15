@@ -2,14 +2,29 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded] = useFonts({
-    PlusJakartaSans: require("../assets/fonts/PlusJakartaSans-VariableFont_wght.ttf"),
+  const [loaded, error] = useFonts({
+    PlusJakartaSansBold: require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
+    PlusJakartaSansExtraBold: require("../assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
+    PlusJakartaSansExtraLight: require("../assets/fonts/PlusJakartaSans-ExtraLight.ttf"),
+    PlusJakartaSansLight: require("../assets/fonts/PlusJakartaSans-Light.ttf"),
+    PlusJakartaSansMedium: require("../assets/fonts/PlusJakartaSans-Medium.ttf"),
+    PlusJakartaSans: require("../assets/fonts/PlusJakartaSans-Regular.ttf"),
+    PlusJakartaSansSemiBold: require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
     return null;
   }
 

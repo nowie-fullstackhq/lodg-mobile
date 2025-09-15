@@ -34,6 +34,20 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/PlusJakartaSans-Bold.ttf",
+            "./src/assets/fonts/PlusJakartaSans-ExtraBold.ttf",
+            "./src/assets/fonts/PlusJakartaSans-ExtraLight.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Light.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Medium.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Regular.ttf",
+            "./src/assets/fonts/PlusJakartaSans-SemiBold.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {
