@@ -1,22 +1,13 @@
-import {
-  Image,
-  type ImageSourcePropType,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import type { ReactElement } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 interface TabBarItemProps {
-  source: ImageSourcePropType;
+  icon: ReactElement;
   title: string;
   focused: boolean;
 }
 
-export default function TabBarItem({
-  source,
-  title,
-  focused,
-}: TabBarItemProps) {
+export default function TabBarItem({ icon, title, focused }: TabBarItemProps) {
   return (
     <View
       style={[
@@ -30,10 +21,7 @@ export default function TabBarItem({
           { backgroundColor: focused ? "#ffffff" : "transparent" },
         ]}
       >
-        <Image
-          source={source}
-          style={styles.icon}
-        />
+        {icon}
       </View>
       <Text
         numberOfLines={1}
@@ -60,11 +48,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     alignItems: "center",
     justifyContent: "center",
-  },
-  icon: {
-    width: 15,
-    height: 15,
-    tintColor: "#2256cb",
   },
   title: {
     fontSize: 8.5,

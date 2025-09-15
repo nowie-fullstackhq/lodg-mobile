@@ -1,5 +1,9 @@
-import TabBarItem from "@/components/TabBarItem";
 import { Tabs } from "expo-router";
+import CalendarIcon from "@/components/icons/CalendarIcon";
+import ExpensesIcon from "@/components/icons/ExpensesIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
+import PaymentsIcon from "@/components/icons/PaymentsIcon";
+import TabBarItem from "@/components/TabBarItem";
 
 export default function TabLayout() {
   return (
@@ -26,7 +30,13 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
-              source={require("@/assets/icons/Home.svg")}
+              icon={
+                <HomeIcon
+                  width={15}
+                  height={15}
+                  color="#2256cb"
+                />
+              }
               title="Dashboard"
               focused={focused}
             />
@@ -38,7 +48,13 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
-              source={require("@/assets/icons/Payments.svg")}
+              icon={
+                <PaymentsIcon
+                  width={15}
+                  height={15}
+                  color="#2256cb"
+                />
+              }
               title="Payments"
               focused={focused}
             />
@@ -50,7 +66,13 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
-              source={require("@/assets/icons/Expenses.svg")}
+              icon={
+                <ExpensesIcon
+                  width={15}
+                  height={15}
+                  color="#2256cb"
+                />
+              }
               title="Expenses"
               focused={focused}
             />
@@ -62,7 +84,13 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
-              source={require("@/assets/icons/Calendar.svg")}
+              icon={
+                <CalendarIcon
+                  width={15}
+                  height={15}
+                  color="#2256cb"
+                />
+              }
               title="Asset Schedule"
               focused={focused}
             />

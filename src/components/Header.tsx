@@ -1,4 +1,6 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import SettingsIcon from "./icons/SettingsIcon";
 
 interface HeaderProps {
   username: string;
@@ -17,6 +19,10 @@ export default function Header({ username }: HeaderProps) {
   const firstName = username.split(" ")[0];
   const initials = getInitials(username);
 
+  const handleSettingsPressed = () => {
+    router.push("/profile");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.userInfoContainer}>
@@ -30,11 +36,11 @@ export default function Header({ username }: HeaderProps) {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.settingsButton}>
-        <Image
-          source={require("@/assets/icons/Settings.svg")}
-          style={styles.settingsIcon}
-        />
+      <TouchableOpacity
+        style={styles.settingsButton}
+        onPress={handleSettingsPressed}
+      >
+        <SettingsIcon style={styles.settingsIcon} />
       </TouchableOpacity>
     </View>
   );

@@ -1,5 +1,8 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import type { ExpenseStatus } from "@/types";
+import CheckIcon from "../icons/CheckIcon";
+import TimeQuarterIcon from "../icons/TimeQuarterIcon";
+import WarningIcon from "../icons/WarningIcon";
 
 interface StatusBadgeProps {
   status: ExpenseStatus;
@@ -12,19 +15,37 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
         return {
           text: "APPROVED",
           color: "#078E17",
-          icon: require("@/assets/icons/icon-check.svg"),
+          icon: (
+            <CheckIcon
+              color="#078E17"
+              width={10}
+              height={10}
+            />
+          ),
         };
       case "declined":
         return {
           text: "DECLINED",
           color: "#F27A80",
-          icon: require("@/assets/icons/icon-warning.svg"),
+          icon: (
+            <WarningIcon
+              color="#F27A80"
+              width={10}
+              height={10}
+            />
+          ),
         };
       default:
         return {
           text: "PENDING",
           color: "#FE9705",
-          icon: require("@/assets/icons/icon-time-quarter-to.svg"),
+          icon: (
+            <TimeQuarterIcon
+              color="#FE9705"
+              width={10}
+              height={10}
+            />
+          ),
         };
     }
   };
@@ -33,10 +54,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={config.icon}
-        style={[styles.icon, { tintColor: config.color }]}
-      />
+      {config.icon}
       <Text style={[styles.text, { color: config.color }]}>{config.text}</Text>
     </View>
   );
@@ -49,10 +67,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 4,
     height: 16,
-  },
-  icon: {
-    width: 10,
-    height: 10,
   },
   text: {
     fontFamily: "PlusJakartaSans",

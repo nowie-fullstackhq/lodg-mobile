@@ -1,5 +1,12 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { ExpenseCategory, ExpenseType } from "@/types";
+import BuildingIcon from "../icons/BuildingIcon";
+import DollarIcon from "../icons/DollarIcon";
+import GiftIcon from "../icons/GiftIcon";
+import GlobeIcon from "../icons/GlobeIcon";
+import HandHoldingHeartIcon from "../icons/HandHoldingHeartIcon";
+import HousePercentIcon from "../icons/HousePercentIcon";
+import RaindropsIcon from "../icons/RaindropsIcon";
 
 interface ExpenseAvatarProps {
   type: ExpenseType;
@@ -20,24 +27,64 @@ export default function ExpenseAvatar({ type, category }: ExpenseAvatarProps) {
     }
   };
 
-  const getIconSource = () => {
+  const getIcon = () => {
     switch (type) {
       case "gift":
-        return require("@/assets/icons/icon-gift.svg");
+        return (
+          <GiftIcon
+            width={20}
+            height={20}
+          />
+        );
       case "web":
-        return require("@/assets/icons/icon-globe.svg");
+        return (
+          <GlobeIcon
+            width={20}
+            height={20}
+          />
+        );
       case "reimbursement":
-        return require("@/assets/icons/icon-dollar.svg");
+        return (
+          <DollarIcon
+            width={20}
+            height={20}
+          />
+        );
       case "water":
-        return require("@/assets/icons/icon-raindrops.svg");
+        return (
+          <RaindropsIcon
+            width={20}
+            height={20}
+          />
+        );
       case "mortgage":
-        return require("@/assets/icons/icon-house-percent.svg");
+        return (
+          <HousePercentIcon
+            width={20}
+            height={20}
+          />
+        );
       case "rent":
-        return require("@/assets/icons/icon-building.svg");
+        return (
+          <BuildingIcon
+            width={20}
+            height={20}
+          />
+        );
       case "donation":
-        return require("@/assets/icons/icon-hand-holding-heart.svg");
+        return (
+          <HandHoldingHeartIcon
+            width={20}
+            height={20}
+          />
+        );
       default:
-        return require("@/assets/icons/icon-gift.svg");
+        return (
+          <GiftIcon
+            width={20}
+            height={20}
+          />
+        );
     }
   };
 
@@ -49,11 +96,7 @@ export default function ExpenseAvatar({ type, category }: ExpenseAvatarProps) {
           { backgroundColor: getBackgroundColor() },
         ]}
       >
-        <Image
-          source={getIconSource()}
-          style={styles.icon}
-          resizeMode="contain"
-        />
+        {getIcon()}
       </View>
     </View>
   );
@@ -71,9 +114,5 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
-  },
-  icon: {
-    width: 20,
-    height: 20,
   },
 });

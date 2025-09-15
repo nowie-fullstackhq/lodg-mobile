@@ -50,7 +50,6 @@ export default function HomeScreen() {
           linkText="Contact us to learn more"
           onPress={() => console.log("First card pressed")}
           gradientColors={["#D8FFDC", "#78FD86"]}
-          backgroundImage={require("@/assets/images/PaperPlane.svg")}
           variant="light"
         />
         <DashboardCard
@@ -59,7 +58,6 @@ export default function HomeScreen() {
           linkText="Read more"
           onPress={() => console.log("second card pressed")}
           gradientColors={["#1F2451", "#343A73"]}
-          backgroundImage={require("@/assets/images/Box.svg")}
           variant="dark"
         />
       </ScrollView>

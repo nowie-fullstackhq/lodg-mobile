@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import EmptyIcon from "./icons/EmptyIcon";
 
 export default function NoData() {
   return (
     <View style={styles.container}>
-      <Image source={require("@/assets/images/Empty.svg")} />
+      <EmptyIcon />
       <Text style={styles.text}>No items to show.</Text>
     </View>
   );

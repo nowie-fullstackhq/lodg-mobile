@@ -1,5 +1,9 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import type { InvoiceStatus } from "@/types";
+import CheckIcon from "../icons/CheckIcon";
+import ReceiptIcon from "../icons/ReceiptIcon";
+import TimeQuarterIcon from "../icons/TimeQuarterIcon";
+import WarningIcon from "../icons/WarningIcon";
 
 interface InvoiceStatusBadgeProps {
   status: InvoiceStatus;
@@ -14,31 +18,61 @@ export default function InvoiceStatusBadge({
         return {
           text: "INVOICE PAID",
           color: "#078E17",
-          icon: require("@/assets/icons/icon-check.svg"),
+          icon: (
+            <CheckIcon
+              color="#078E17"
+              width={10}
+              height={10}
+            />
+          ),
         };
       case "uploaded":
         return {
           text: "INVOICE UPLOADED",
           color: "#ADADAD",
-          icon: require("@/assets/icons/icon-receipt.svg"),
+          icon: (
+            <ReceiptIcon
+              color="#ADADAD"
+              width={10}
+              height={10}
+            />
+          ),
         };
       case "sent":
         return {
           text: "INVOICE SENT",
           color: "#FE9705",
-          icon: require("@/assets/icons/icon-time-quarter-to.svg"),
+          icon: (
+            <TimeQuarterIcon
+              color="#FE9705"
+              width={10}
+              height={10}
+            />
+          ),
         };
       case "overdue":
         return {
           text: "INVOICE OVERDUE",
           color: "#F27A80",
-          icon: require("@/assets/icons/icon-warning.svg"),
+          icon: (
+            <WarningIcon
+              color="#F27A80"
+              width={10}
+              height={10}
+            />
+          ),
         };
       default:
         return {
           text: "UNKNOWN",
           color: "#ADADAD",
-          icon: require("@/assets/icons/icon-receipt.svg"),
+          icon: (
+            <ReceiptIcon
+              color="#ADADAD"
+              width={10}
+              height={10}
+            />
+          ),
         };
     }
   };
@@ -47,10 +81,7 @@ export default function InvoiceStatusBadge({
 
   return (
     <View style={styles.container}>
-      <Image
-        source={config.icon}
-        style={[styles.icon, { tintColor: config.color }]}
-      />
+      {config.icon}
       <Text style={[styles.text, { color: config.color }]}>{config.text}</Text>
     </View>
   );
@@ -63,10 +94,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 4,
     height: 16,
-  },
-  icon: {
-    width: 10,
-    height: 10,
   },
   text: {
     fontFamily: "PlusJakartaSans",

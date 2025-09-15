@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Image,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
   ScrollView,
@@ -9,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import EyeIcon from "./icons/EyeIcon";
 
 export default function Balance() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -54,10 +54,7 @@ export default function Balance() {
           style={styles.eyeButton}
           onPress={toggleVisibility}
         >
-          <Image
-            source={require("@/assets/icons/Eye.svg")}
-            style={styles.eyeIcon}
-          />
+          <EyeIcon style={styles.eyeIcon} />
         </TouchableOpacity>
       </View>
 

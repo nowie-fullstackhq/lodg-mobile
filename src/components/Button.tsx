@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import PlusIcon from "./icons/PlusIcon";
 
 interface ButtonProps {
   title: string;
@@ -18,10 +19,7 @@ export default function Button({
       disabled={disabled}
     >
       <View style={styles.iconContainer}>
-        <Image
-          source={require("@/assets/icons/Plus.svg")}
-          style={styles.icon}
-        />
+        <PlusIcon style={styles.icon} />
       </View>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
