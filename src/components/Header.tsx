@@ -20,7 +20,7 @@ export default function Header({ username }: HeaderProps) {
   const initials = getInitials(username);
 
   const handleSettingsPressed = () => {
-    router.push("/profile");
+    router.push("/settings");
   };
 
   return (

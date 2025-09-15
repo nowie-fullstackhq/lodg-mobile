@@ -17,7 +17,7 @@ export default function TabLayout() {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           paddingTop: 35,
-          paddingHorizontal: 24,
+          paddingHorizontal: 12,
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#ffffff",
@@ -101,7 +101,7 @@ export default function TabLayout() {
                   color="#2256CB"
                 />
               }
-              title="Settings"
+              title="Asset Schedule"
               focused={focused}
             />
           ),
