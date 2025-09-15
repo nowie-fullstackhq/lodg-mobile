@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { View } from "react-native";
 import type { ExpenseData } from "@/types";
 import NoData from "../NoData";
 import TransactionListHeader from "../TransactionListHeader";
@@ -15,20 +15,14 @@ export default function List({ data }: ListProps) {
         title="Expenses"
         onPress={() => {}}
       />
-      <View style={{ marginBottom: 40 }}>
+      <View style={{ marginBottom: 40, gap: 16 }}>
         {data.length > 0 ? (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <Item
-                key={item.id}
-                expense={item}
-              />
-            )}
-            keyExtractor={item => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 16 }}
-          />
+          data.map(item => (
+            <Item
+              key={item.id}
+              expense={item}
+            />
+          ))
         ) : (
           <NoData />
         )}
