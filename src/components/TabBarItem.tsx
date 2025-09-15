@@ -12,20 +12,23 @@ export default function TabBarItem({ icon, title, focused }: TabBarItemProps) {
     <View
       style={[
         styles.container,
-        { backgroundColor: focused ? "#2256cb" : "transparent" },
+        { backgroundColor: focused ? "#2256CB" : "transparent" },
       ]}
     >
       <View
         style={[
           styles.iconContainer,
-          { backgroundColor: focused ? "#ffffff" : "transparent" },
+          {
+            backgroundColor: focused ? "#FEFEFE" : "#FFFFFF",
+            borderRadius: focused ? 5 : 12,
+          },
         ]}
       >
         {icon}
       </View>
       <Text
         numberOfLines={1}
-        style={[styles.title, { color: focused ? "#ffffff" : "#888888" }]}
+        style={[styles.title, { color: focused ? "#FEFEFE" : "#888888" }]}
       >
         {title}
       </Text>
@@ -35,25 +38,25 @@ export default function TabBarItem({ icon, title, focused }: TabBarItemProps) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 18,
-    paddingVertical: 13,
-    paddingBottom: 16,
+    width: 73,
+    height: 73,
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 70,
+    paddingVertical: 10,
+    gap: 4,
   },
   iconContainer: {
-    padding: 8,
-    borderRadius: 6,
+    width: 30,
+    height: 30,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 8.5,
     fontWeight: "700",
-    marginTop: 6,
     fontFamily: "PlusJakartaSans",
     textAlign: "center",
+    lineHeight: 16,
   },
 });

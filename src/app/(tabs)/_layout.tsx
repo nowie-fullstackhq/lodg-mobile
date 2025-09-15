@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { Pressable } from "react-native";
 import CalendarIcon from "@/components/icons/CalendarIcon";
 import ExpensesIcon from "@/components/icons/ExpensesIcon";
 import HomeIcon from "@/components/icons/HomeIcon";
@@ -11,18 +12,27 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          padding: 40,
-          paddingLeft: 24,
-          paddingRight: 24,
-          borderTopEndRadius: 20,
-          borderTopStartRadius: 20,
           height: 119,
-          backgroundColor: "#fff",
-          borderColor: "#fff",
+          backgroundColor: "#FEFEFE",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          paddingTop: 35,
+          paddingHorizontal: 24,
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#ffffff",
         tabBarInactiveTintColor: "#888888",
+        tabBarButton: ({ children, onPress }) => (
+          <Pressable
+            onPress={onPress}
+            style={{ justifyContent: "center", alignItems: "center" }}
+            android_ripple={{
+              foreground: true,
+            }}
+          >
+            {children}
+          </Pressable>
+        ),
       }}
     >
       <Tabs.Screen
@@ -34,7 +44,7 @@ export default function TabLayout() {
                 <HomeIcon
                   width={15}
                   height={15}
-                  color="#2256cb"
+                  color="#2256CB"
                 />
               }
               title="Dashboard"
@@ -52,7 +62,7 @@ export default function TabLayout() {
                 <PaymentsIcon
                   width={15}
                   height={15}
-                  color="#2256cb"
+                  color="#2256CB"
                 />
               }
               title="Payments"
@@ -70,7 +80,7 @@ export default function TabLayout() {
                 <ExpensesIcon
                   width={15}
                   height={15}
-                  color="#2256cb"
+                  color="#2256CB"
                 />
               }
               title="Expenses"
@@ -88,10 +98,10 @@ export default function TabLayout() {
                 <CalendarIcon
                   width={15}
                   height={15}
-                  color="#2256cb"
+                  color="#2256CB"
                 />
               }
-              title="Asset Schedule"
+              title="Settings"
               focused={focused}
             />
           ),
