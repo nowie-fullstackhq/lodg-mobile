@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { type Href, router } from "expo-router";
 import type React from "react";
 import {
   Dimensions,
@@ -23,6 +23,7 @@ interface MenuItem {
   id: string;
   icon: React.ReactNode;
   title: string;
+  route: Href;
 }
 
 export default function SettingsScreen() {
@@ -37,6 +38,7 @@ export default function SettingsScreen() {
         />
       ),
       title: "How It Works",
+      route: "/how-it-works",
     },
     {
       id: "2",
@@ -48,6 +50,7 @@ export default function SettingsScreen() {
         />
       ),
       title: "Lodg Subscription",
+      route: "/how-it-works",
     },
   ];
 
@@ -62,6 +65,7 @@ export default function SettingsScreen() {
         />
       ),
       title: "Account Profile",
+      route: "/how-it-works",
     },
     {
       id: "4",
@@ -73,13 +77,19 @@ export default function SettingsScreen() {
         />
       ),
       title: "Log out",
+      route: "/how-it-works",
     },
   ];
+
+  const handleMenuPress = (route: Href) => {
+    router.push(route);
+  };
 
   const renderMenuItem = (item: MenuItem) => (
     <TouchableOpacity
       key={item.id}
       style={styles.menuItem}
+      onPress={() => handleMenuPress(item.route)}
     >
       <View style={styles.iconContainer}>{item.icon}</View>
       <Text style={styles.menuItemText}>{item.title}</Text>
