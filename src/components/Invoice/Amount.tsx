@@ -29,14 +29,12 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   amount: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     color: "#222529",
   },
   currency: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     color: "#222529",
   },

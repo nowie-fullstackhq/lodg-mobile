@@ -111,8 +111,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   titleText: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     lineHeight: 20,
     color: "#222529",
@@ -120,8 +119,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   subtitleText: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "500",
+    fontFamily: "PlusJakartaSansMedium",
     fontSize: 9.89,
     lineHeight: 16,
     color: "#222529",
@@ -137,7 +135,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: "PlusJakartaSans",
-    fontWeight: "400",
     fontSize: 12,
     lineHeight: 18,
     color: "#222529",

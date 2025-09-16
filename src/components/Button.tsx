@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     tintColor: "#2256cb",
   },
   text: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "600",
+    fontFamily: "PlusJakartaSansSemiBold",
     textAlign: "center",
     fontSize: 12,
     lineHeight: 24,

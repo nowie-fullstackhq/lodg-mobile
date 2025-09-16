@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
     height: 16,
   },
   text: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 9.89,
     lineHeight: 16,
     letterSpacing: 0.02,

@@ -70,21 +70,18 @@ const styles = StyleSheet.create({
   initialsText: {
     color: "#ffffff",
     fontSize: 14,
-    fontWeight: "bold",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
   },
   greetingContainer: {
     flex: 1,
   },
   greetingText: {
     fontSize: 14,
-    fontWeight: "700",
     color: "#333333",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
   },
   welcomeText: {
     fontSize: 10,
-    fontWeight: "400",
     color: "#676767",
     fontFamily: "PlusJakartaSans",
     marginTop: 4,

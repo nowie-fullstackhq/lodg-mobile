@@ -153,8 +153,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   bankCardTitle: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 18,
     lineHeight: 28,
     color: "#222529",
@@ -179,8 +178,7 @@ const styles = StyleSheet.create({
     color: "#676767",
   },
   detailValue: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 12,
     lineHeight: 18,
     color: "#676767",
@@ -219,8 +217,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   guideTitle: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 18,
     lineHeight: 28,
     color: "#222529",
@@ -241,8 +238,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#F7F7F7",
   },
   stepNumber: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 12,
     lineHeight: 20,
     color: "#2256CB",
@@ -253,8 +249,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   stepTitle: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     lineHeight: 20,
     color: "#222529",

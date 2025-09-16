@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   },
   initials: {
     fontSize: 14,
-    fontWeight: "bold",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
   },
 });

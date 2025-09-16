@@ -23,14 +23,12 @@ const styles = StyleSheet.create({
     height: 39,
   },
   clientName: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     color: "#222529",
   },
   date: {
     fontFamily: "PlusJakartaSans",
-    fontWeight: "400",
     fontSize: 9.89,
     lineHeight: 16,
     color: "#676767",

@@ -108,11 +108,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 12,
-    fontWeight: "700",
     color: "#888888",
     lineHeight: 16,
     textTransform: "uppercase",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
     marginRight: 4,
   },
   eyeButton: {
@@ -132,9 +131,8 @@ const styles = StyleSheet.create({
   },
   amountText: {
     fontSize: 32,
-    fontWeight: "700",
     color: "#2D3748",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
   },
   indicatorContainer: {
     flexDirection: "row",

@@ -118,8 +118,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   title: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 18,
     lineHeight: 28,
     color: "#222529",
@@ -130,7 +129,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontFamily: "PlusJakartaSans",
-    fontWeight: "400",
     fontSize: 12,
     lineHeight: 18,
     color: "#222529",
@@ -145,8 +143,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   linkText: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "500",
+    fontFamily: "PlusJakartaSansMedium",
     fontSize: 12,
     lineHeight: 18,
     color: "#2256CB",

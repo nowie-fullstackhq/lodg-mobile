@@ -26,15 +26,13 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   title: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 18,
     lineHeight: 28,
     color: "#222529",
   },
   buttonText: {
     fontFamily: "PlusJakartaSans",
-    fontWeight: "400",
     fontSize: 14,
     color: "#2256CB",
   },

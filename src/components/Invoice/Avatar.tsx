@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7F7F7",
   },
   initials: {
-    fontFamily: "PlusJakartaSans",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     lineHeight: 20,
     textAlign: "center",

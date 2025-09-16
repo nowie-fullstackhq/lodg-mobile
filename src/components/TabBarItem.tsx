@@ -54,8 +54,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 8.5,
-    fontWeight: "700",
-    fontFamily: "PlusJakartaSans",
+    fontFamily: "PlusJakartaSansBold",
     textAlign: "center",
     lineHeight: 16,
   },
