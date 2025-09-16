@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 14,
     fontFamily: "PlusJakartaSansBold",
+    lineHeight: 20
   },
   greetingContainer: {
     flex: 1,
