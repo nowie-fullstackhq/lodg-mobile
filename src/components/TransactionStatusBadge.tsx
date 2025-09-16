@@ -1,17 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
-import type { InvoiceStatus } from "@/types";
-import CheckIcon from "../icons/CheckIcon";
-import ReceiptIcon from "../icons/ReceiptIcon";
-import TimeQuarterIcon from "../icons/TimeQuarterIcon";
-import WarningIcon from "../icons/WarningIcon";
+import type { Status } from "@/types";
+import CheckIcon from "./icons/CheckIcon";
+import ReceiptIcon from "./icons/ReceiptIcon";
+import TimeQuarterIcon from "./icons/TimeQuarterIcon";
+import WarningIcon from "./icons/WarningIcon";
 
-interface InvoiceStatusBadgeProps {
-  status: InvoiceStatus;
+type StatusType = Status;
+
+interface StatusBadgeProps {
+  status: StatusType;
+  type?: "invoice" | "expense";
 }
 
-export default function InvoiceStatusBadge({
+export default function StatusBadge({
   status,
-}: InvoiceStatusBadgeProps) {
+  type = "invoice",
+}: StatusBadgeProps) {
   const getStatusConfig = () => {
     switch (status) {
       case "paid":
@@ -62,6 +66,54 @@ export default function InvoiceStatusBadge({
             />
           ),
         };
+      case "accepted":
+        return {
+          text: "ACCEPTED",
+          color: "#078E17",
+          icon: (
+            <CheckIcon
+              color="#078E17"
+              width={10}
+              height={10}
+            />
+          ),
+        };
+      case "approved":
+        return {
+          text: "APPROVED",
+          color: "#078E17",
+          icon: (
+            <CheckIcon
+              color="#078E17"
+              width={10}
+              height={10}
+            />
+          ),
+        };
+      case "declined":
+        return {
+          text: "DECLINED",
+          color: "#F27A80",
+          icon: (
+            <WarningIcon
+              color="#F27A80"
+              width={10}
+              height={10}
+            />
+          ),
+        };
+      case "pending":
+        return {
+          text: type === "invoice" ? "PENDING PAYMENT" : "PENDING",
+          color: "#FE9705",
+          icon: (
+            <TimeQuarterIcon
+              color="#FE9705"
+              width={10}
+              height={10}
+            />
+          ),
+        };
       default:
         return {
           text: "UNKNOWN",
@@ -90,10 +142,10 @@ export default function InvoiceStatusBadge({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
     gap: 4,
     height: 16,
+    justifyContent: "flex-end",
   },
   text: {
     fontFamily: "PlusJakartaSansBold",

@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
-interface DetailsProps {
+interface TransactionDetailsProps {
   clientName: string;
   date: string;
 }
 
-export default function Details({ clientName, date }: DetailsProps) {
+export default function TransactionDetails({
+  clientName,
+  date,
+}: TransactionDetailsProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.clientName}>{clientName}</Text>

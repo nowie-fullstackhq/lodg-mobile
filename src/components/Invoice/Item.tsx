@@ -1,25 +1,31 @@
 import { StyleSheet, View } from "react-native";
 import type { InvoiceData } from "@/types";
-import Amount from "./Amount";
+import TransactionAmount from "../TransactionAmount";
+import TransactionDetails from "../TransactionDetails";
 import Avatar from "./Avatar";
-import Details from "./Details";
 
 interface ItemProps {
   invoice: InvoiceData;
+  showBorder?: boolean;
 }
 
-export default function Item({ invoice }: ItemProps) {
+export default function Item({ invoice, showBorder = true }: ItemProps) {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        showBorder ? styles.borderedContainer : styles.noBorder,
+      ]}
+    >
       <Avatar
         username={invoice.clientName}
         hasAvatar={invoice.hasAvatar}
       />
-      <Details
+      <TransactionDetails
         clientName={invoice.clientName}
         date={invoice.date}
       />
-      <Amount
+      <TransactionAmount
         amount={invoice.amount}
         currency={invoice.currency}
         status={invoice.status}
@@ -36,9 +42,16 @@ const styles = StyleSheet.create({
     padding: 20,
     gap: 12,
     height: 85,
+  },
+  borderedContainer: {
     backgroundColor: "#FDFDFD",
     borderWidth: 1,
     borderColor: "#DCDCDC",
     borderRadius: 8,
+  },
+  noBorder: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    height: 77,
   },
 });

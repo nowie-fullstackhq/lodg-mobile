@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import type { ExpenseData } from "@/types";
-import Amount from "./Amount";
+import TransactionAmount from "../TransactionAmount";
+import TransactionDetails from "../TransactionDetails";
 import Avatar from "./Avatar";
-import Details from "./Details";
 
 interface ItemProps {
   expense: ExpenseData;
@@ -15,14 +15,15 @@ export default function Item({ expense }: ItemProps) {
         type={expense.type}
         category={expense.category}
       />
-      <Details
+      <TransactionDetails
         clientName={expense.title}
         date={expense.date}
       />
-      <Amount
+      <TransactionAmount
         amount={expense.amount}
         currency={expense.currency}
         status={expense.status}
+        type="expense"
       />
     </View>
   );

@@ -1,4 +1,12 @@
-export type InvoiceStatus = "paid" | "uploaded" | "sent" | "overdue";
+export type Status =
+  | "paid"
+  | "uploaded"
+  | "sent"
+  | "overdue"
+  | "approved"
+  | "declined"
+  | "pending"
+  | "accepted";
 
 export interface InvoiceData {
   id: string;
@@ -6,11 +14,9 @@ export interface InvoiceData {
   amount: string;
   currency: string;
   date: string;
-  status: InvoiceStatus;
+  status: Status;
   hasAvatar: boolean;
 }
-
-export type ExpenseStatus = "approved" | "declined" | "pending";
 
 export type ExpenseType =
   | "gift"
@@ -31,5 +37,5 @@ export interface ExpenseData {
   date: string;
   type: ExpenseType;
   category: ExpenseCategory;
-  status: ExpenseStatus;
+  status: Status;
 }

@@ -1,21 +1,30 @@
 import { StyleSheet, Text, View } from "react-native";
-import type { InvoiceStatus } from "@/types";
-import InvoiceStatusBadge from "./InvoiceStatusBadge";
+import type { Status } from "@/types";
+import TransactionStatusBadge from "./TransactionStatusBadge";
 
-interface AmountProps {
+interface TransactionAmountProps {
   amount: string;
   currency: string;
-  status: InvoiceStatus;
+  status: Status;
+  type?: "invoice" | "expense";
 }
 
-export default function Amount({ amount, currency, status }: AmountProps) {
+export default function TransactionAmount({
+  amount,
+  currency,
+  status,
+  type = "invoice",
+}: TransactionAmountProps) {
   return (
     <View>
       <View style={styles.amountContainer}>
         <Text style={styles.amount}>{amount}</Text>
         <Text style={styles.currency}>{currency}</Text>
       </View>
-      <InvoiceStatusBadge status={status} />
+      <TransactionStatusBadge
+        status={status}
+        type={type}
+      />
     </View>
   );
 }
