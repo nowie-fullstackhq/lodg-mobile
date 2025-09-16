@@ -151,9 +151,7 @@ export default function SettingsScreen() {
 
             <HelpCard
               buttonText="Contact Us"
-              onButtonPress={() => {
-                console.log("Help button pressed");
-              }}
+              onButtonPress={() => router.push("/contact-us")}
             />
           </View>
         </ScrollView>
