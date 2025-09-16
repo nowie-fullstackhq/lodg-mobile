@@ -1,34 +1,51 @@
 import { Ionicons } from "@expo/vector-icons";
+import type { ReactNode } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CardReceivedIcon from "./icons/CardReceivedIcon";
 import MoneyIcon from "./icons/MoneyIcon";
-import ReceiptEditIcon from "./icons/ReceiptEditIcon";
+import ReceiptEditSmallIcon from "./icons/ReceiptEditSmallIcon";
 
-const paymentMethods = [
-  {
-    id: "1",
-    icon: <ReceiptEditIcon />,
-    title: "Send Quotes or Invoices",
-    description:
-      "Easily create and send quotes for client approval or generate invoices to get paid faster.",
-  },
-  {
-    id: "2",
-    icon: <MoneyIcon />,
-    title: "Upload an invoice",
-    description:
-      "Already been paid? No troubles. Simply upload the invoice you sent to your employer or client",
-  },
-  {
-    id: "3",
-    icon: <CardReceivedIcon />,
-    title: "Direct debit",
-    description:
-      "Get your employer or client to pay you into your Lodg account",
-  },
-];
+interface PaymentMethod {
+  id: string;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  onPress: () => void;
+}
 
-export default function PaymentMethodCard() {
+interface PaymentMethodCardProps {
+  onSendQuotesPress: () => void;
+}
+
+export default function PaymentMethodCard({
+  onSendQuotesPress,
+}: PaymentMethodCardProps) {
+  const paymentMethods: PaymentMethod[] = [
+    {
+      id: "1",
+      icon: <ReceiptEditSmallIcon />,
+      title: "Send Quotes or Invoices",
+      description:
+        "Easily create and send quotes for client approval or generate invoices to get paid faster.",
+      onPress: onSendQuotesPress,
+    },
+    {
+      id: "2",
+      icon: <MoneyIcon />,
+      title: "Upload an invoice",
+      description:
+        "Already been paid? No troubles. Simply upload the invoice you sent to your employer or client",
+      onPress: () => {},
+    },
+    {
+      id: "3",
+      icon: <CardReceivedIcon />,
+      title: "Direct debit",
+      description:
+        "Get your employer or client to pay you into your Lodg account",
+      onPress: () => {},
+    },
+  ];
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Receive payments to Lodg</Text>
@@ -37,6 +54,7 @@ export default function PaymentMethodCard() {
           <TouchableOpacity
             key={method.id}
             style={styles.methodItem}
+            onPress={method.onPress}
           >
             <View style={styles.iconContainer}>{method.icon}</View>
             <View style={styles.textContainer}>

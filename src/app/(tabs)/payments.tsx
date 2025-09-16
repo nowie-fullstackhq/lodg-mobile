@@ -1,13 +1,33 @@
+import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
+import InvoiceQuoteModal from "@/components/InvoiceQuoteModal";
 import PaymentMethodCard from "@/components/PaymentMethod";
-import { invoices } from "@/mock/invoices";
-import { quotes } from "@/mock/quotes";
-import { manual } from "@/mock/manual";
 import PaymentsItem from "@/components/PaymentsItem";
+import { invoices } from "@/mock/invoices";
+import { manual } from "@/mock/manual";
+import { quotes } from "@/mock/quotes";
 
 export default function PaymentsScreen() {
+  const [showInvoiceQuoteModal, setShowInvoiceQuoteModal] = useState(false);
+
+  const handleSendQuotesPress = () => {
+    setShowInvoiceQuoteModal(true);
+  };
+
+  const handleCreateQuote = () => {
+    console.log("Create Quote pressed");
+    setShowInvoiceQuoteModal(false);
+    // TODO: Navigate to create quote screen
+  };
+
+  const handleGenerateInvoice = () => {
+    console.log("Generate Invoice pressed");
+    setShowInvoiceQuoteModal(false);
+    // TODO: Navigate to generate invoice screen
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -16,7 +36,7 @@ export default function PaymentsScreen() {
       >
         <View style={styles.mainContent}>
           <Header username="John Doe" />
-          <PaymentMethodCard />
+          <PaymentMethodCard onSendQuotesPress={handleSendQuotesPress} />
 
           <PaymentsItem
             title="Invoices"
@@ -32,6 +52,13 @@ export default function PaymentsScreen() {
           />
         </View>
       </ScrollView>
+
+      <InvoiceQuoteModal
+        visible={showInvoiceQuoteModal}
+        onClose={() => setShowInvoiceQuoteModal(false)}
+        onCreateQuote={handleCreateQuote}
+        onGenerateInvoice={handleGenerateInvoice}
+      />
     </SafeAreaView>
   );
 }
