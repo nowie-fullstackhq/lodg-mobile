@@ -1,5 +1,6 @@
 import { type Href, router } from "expo-router";
 import type React from "react";
+import { useState } from "react";
 import {
   Dimensions,
   SafeAreaView,
@@ -16,6 +17,7 @@ import LogoutIcon from "@/components/icons/LogoutIcon";
 import PayoutsIcon from "@/components/icons/PayoutsIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
 import SubscriptionIcon from "@/components/icons/SubscriptionIcon";
+import LogoutModal from "@/components/LogoutModal";
 
 const { width } = Dimensions.get("window");
 
@@ -24,9 +26,12 @@ interface MenuItem {
   icon: React.ReactNode;
   title: string;
   route: Href;
+  isLogout?: boolean;
 }
 
 export default function SettingsScreen() {
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const menuItems: MenuItem[] = [
     {
       id: "1",
@@ -50,7 +55,7 @@ export default function SettingsScreen() {
         />
       ),
       title: "Lodg Subscription",
-      route: "/how-it-works",
+      route: "/subscription",
     },
   ];
 
@@ -77,19 +82,36 @@ export default function SettingsScreen() {
         />
       ),
       title: "Log out",
-      route: "/how-it-works",
+      route: "/",
+      isLogout: true,
     },
   ];
 
-  const handleMenuPress = (route: Href) => {
-    router.push(route);
+  const handleMenuPress = (route: Href, isLogout?: boolean) => {
+    if (isLogout) {
+      setShowLogoutModal(true);
+    } else {
+      router.push(route);
+    }
+  };
+
+  const handleLogout = () => {
+    console.log("User logged out");
+    // TODO: Clear any stored authentication tokens, user data, etc.
+
+    setShowLogoutModal(false);
+    router.push("/");
+  };
+
+  const handleCancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   const renderMenuItem = (item: MenuItem) => (
     <TouchableOpacity
       key={item.id}
       style={styles.menuItem}
-      onPress={() => handleMenuPress(item.route)}
+      onPress={() => handleMenuPress(item.route, item.isLogout)}
     >
       <View style={styles.iconContainer}>{item.icon}</View>
       <Text style={styles.menuItemText}>{item.title}</Text>
@@ -156,6 +178,14 @@ export default function SettingsScreen() {
           </View>
         </ScrollView>
       </View>
+
+      <LogoutModal
+        visible={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onCancel={handleCancelLogout}
+        onConfirm={handleLogout}
+        username="johndoe"
+      />
     </SafeAreaView>
   );
 }
