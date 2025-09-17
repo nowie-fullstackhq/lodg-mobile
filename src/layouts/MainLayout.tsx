@@ -13,9 +13,7 @@ export default function MainLayout({ children, username }: MainLayoutProps) {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <Header username={username} />
-        <View style={styles.content}>
-          {children}
-        </View>
+        <View style={styles.content}>{children}</View>
       </ScrollView>
     </SafeAreaView>
   );

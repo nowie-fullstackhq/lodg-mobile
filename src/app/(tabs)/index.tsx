@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Balance from "@/components/Balance";
 import Button from "@/components/Button";
 import DashboardCard from "@/components/DashboardCard";

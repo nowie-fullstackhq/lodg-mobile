@@ -1,16 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CreateInvoiceModal from "@/components/CreateInvoiceModal";
 import Item from "@/components/Invoice/Item";
-import SettingsItemScreenHeader from "@/components/PageHeader";
 import UploadInvoiceModal from "@/components/UploadInvoiceModal";
 import PageLayout from "@/layouts/PageLayout";
 import { invoices as invoicesData } from "@/mock/invoices";
