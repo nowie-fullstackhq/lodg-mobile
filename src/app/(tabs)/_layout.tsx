@@ -54,7 +54,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="payments"
+        name="(payments)"
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
@@ -105,13 +105,6 @@ export default function TabLayout() {
               focused={focused}
             />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="invoices"
-        options={{
-          href: null,
-          title: "Invoices",
         }}
       />
     </Tabs>

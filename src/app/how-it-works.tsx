@@ -1,6 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import SettingsItemScreenHeader from "@/components/SettingsItemScreenHeader";
+import { StyleSheet, Text, View } from "react-native";
+import PageLayout from "@/layouts/PageLayout";
 
 export default function InvoiceScreen() {
   const steps = [
@@ -55,94 +54,78 @@ export default function InvoiceScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        <SettingsItemScreenHeader
-          breadcrumb="Settings / Preset Instructions"
-          title="How It Works"
-        />
-        <View style={styles.content}>
-          <View style={styles.bankCard}>
-            <Text style={styles.bankCardTitle}>
-              Your Lodg Bank Account Details
-            </Text>
+    <PageLayout
+      breadcrumb="Settings / Preset Instructions"
+      title="How It Works"
+    >
+      <View style={styles.content}>
+        <View style={styles.bankCard}>
+          <Text style={styles.bankCardTitle}>
+            Your Lodg Bank Account Details
+          </Text>
 
-            <View style={styles.bankDetailsContainer}>
-              <View style={styles.bankDetails}>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>Name</Text>
-                  <Text style={styles.detailValue}>Lodg</Text>
-                </View>
-
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>Account Number</Text>
-                  <Text style={styles.detailValue}>[Account Number]</Text>
-                </View>
-
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>Lodg Unique ID</Text>
-                  <Text style={styles.detailValue}>[ID Number]</Text>
-                </View>
-
-                <Text style={styles.referenceNote}>
-                  Please use your unique account ID ([ID Number]) as the
-                  reference for your payments.
-                </Text>
+          <View style={styles.bankDetailsContainer}>
+            <View style={styles.bankDetails}>
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Name</Text>
+                <Text style={styles.detailValue}>Lodg</Text>
               </View>
-            </View>
-            <View style={styles.taxNote}>
-              <Text style={styles.taxNoteText}>
-                If you'd like us to pay tax on money you've already earned,
-                please use the same details.
+
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Account Number</Text>
+                <Text style={styles.detailValue}>[Account Number]</Text>
+              </View>
+
+              <View style={styles.detailRow}>
+                <Text style={styles.detailLabel}>Lodg Unique ID</Text>
+                <Text style={styles.detailValue}>[ID Number]</Text>
+              </View>
+
+              <Text style={styles.referenceNote}>
+                Please use your unique account ID ([ID Number]) as the reference
+                for your payments.
               </Text>
             </View>
           </View>
-
-          <View style={styles.guideCard}>
-            <View style={styles.guideHeader}>
-              <Text style={styles.guideTitle}>
-                How Lodg Works: A Simple Guide
-              </Text>
-            </View>
-
-            <View style={styles.divider} />
-
-            <View style={styles.stepsContainer}>
-              {steps.map(step => (
-                <View
-                  key={step.number}
-                  style={styles.stepItem}
-                >
-                  <Text style={styles.stepNumber}>Step {step.number}</Text>
-                  <View style={styles.stepContent}>
-                    <Text style={styles.stepTitle}>{step.title}</Text>
-                    <Text style={styles.stepDescription}>
-                      {step.description}
-                    </Text>
-                  </View>
-                </View>
-              ))}
-            </View>
+          <View style={styles.taxNote}>
+            <Text style={styles.taxNoteText}>
+              If you'd like us to pay tax on money you've already earned, please
+              use the same details.
+            </Text>
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+
+        <View style={styles.guideCard}>
+          <View style={styles.guideHeader}>
+            <Text style={styles.guideTitle}>
+              How Lodg Works: A Simple Guide
+            </Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.stepsContainer}>
+            {steps.map(step => (
+              <View
+                key={step.number}
+                style={styles.stepItem}
+              >
+                <Text style={styles.stepNumber}>Step {step.number}</Text>
+                <View style={styles.stepContent}>
+                  <Text style={styles.stepTitle}>{step.title}</Text>
+                  <Text style={styles.stepDescription}>{step.description}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </View>
+      </View>
+    </PageLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F7F7F7",
-  },
-  scrollView: {
-    flex: 1,
-  },
   content: {
-    paddingHorizontal: 24,
     gap: 16,
     paddingBottom: 40,
   },

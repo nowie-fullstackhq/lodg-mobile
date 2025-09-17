@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Header from "@/components/Header";
+import { StyleSheet, View } from "react-native";
 import InvoiceQuoteModal from "@/components/InvoiceQuoteModal";
 import PaymentMethodCard from "@/components/PaymentMethod";
 import PaymentsItem from "@/components/PaymentsItem";
+import MainLayout from "@/layouts/MainLayout";
 import { invoices } from "@/mock/invoices";
 import { manual } from "@/mock/manual";
 import { quotes } from "@/mock/quotes";
@@ -29,13 +28,9 @@ export default function PaymentsScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <View style={styles.mainContent}>
-          <Header username="John Doe" />
+    <>
+      <MainLayout username="John Doe">
+        <View style={styles.content}>
           <PaymentMethodCard onSendQuotesPress={handleSendQuotesPress} />
 
           <PaymentsItem
@@ -51,7 +46,7 @@ export default function PaymentsScreen() {
             data={manual}
           />
         </View>
-      </ScrollView>
+      </MainLayout>
 
       <InvoiceQuoteModal
         visible={showInvoiceQuoteModal}
@@ -59,23 +54,13 @@ export default function PaymentsScreen() {
         onCreateQuote={handleCreateQuote}
         onGenerateInvoice={handleGenerateInvoice}
       />
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F7F7F7",
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 40,
-  },
-  mainContent: {
-    paddingHorizontal: 24,
+  content: {
+    marginTop: 12,
     gap: 16,
   },
 });

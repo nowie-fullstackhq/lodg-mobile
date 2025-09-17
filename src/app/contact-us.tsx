@@ -1,17 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CallIcon from "@/components/icons/CallIcon";
 import DirectoryIcon from "@/components/icons/DirectoryIcon";
 import SocialsIcon from "@/components/icons/SocialsIcon";
-import SettingsItemScreenHeader from "@/components/SettingsItemScreenHeader";
+import PageLayout from "@/layouts/PageLayout";
 
 export default function ContactUs() {
   const [expandedFAQ, setExpandedFAQ] = useState(0);
@@ -49,124 +42,106 @@ export default function ContactUs() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        <SettingsItemScreenHeader
-          breadcrumb="Lodg  /  Contact Us"
-          title="Contact Us"
-        />
-
-        <View style={styles.content}>
-          <View style={styles.contactCard}>
-            <View style={styles.contactHeader}>
-              <Text style={styles.contactTitle}>Contact Us</Text>
-              <Text style={styles.contactSubtitle}>
-                Still have questions? No worries, book a free call with our
-                accountants to assist you with any queries.
-              </Text>
-            </View>
-
-            <View style={styles.contactMethods}>
-              <View style={styles.contactMethod}>
-                <View style={styles.contactIcon}>
-                  <CallIcon />
-                </View>
-                <View style={styles.contactInfo}>
-                  <Text style={styles.contactLabel}>Phone</Text>
-                  <Text style={styles.contactValue}>0800 00 1718</Text>
-                </View>
-              </View>
-
-              <View style={styles.contactMethod}>
-                <View style={styles.contactIcon}>
-                  <DirectoryIcon />
-                </View>
-                <View style={styles.contactInfo}>
-                  <Text style={styles.contactLabel}>Email</Text>
-                  <Text style={styles.contactValue}>accounts@lodg.co.nz</Text>
-                </View>
-              </View>
-
-              <View style={styles.contactMethod}>
-                <View style={styles.contactIcon}>
-                  <SocialsIcon />
-                </View>
-                <View style={styles.contactInfo}>
-                  <Text style={styles.contactLabel}>Connect with Us</Text>
-                  <Text style={styles.contactValue}>@lodg</Text>
-                </View>
-              </View>
-            </View>
-
-            <TouchableOpacity style={styles.bookCallButton}>
-              <Text style={styles.bookCallText}>Schedule a call</Text>
-            </TouchableOpacity>
+    <PageLayout
+      breadcrumb="Lodg  /  Contact Us"
+      title="Contact Us"
+    >
+      <View style={styles.content}>
+        <View style={styles.contactCard}>
+          <View style={styles.contactHeader}>
+            <Text style={styles.contactTitle}>Contact Us</Text>
+            <Text style={styles.contactSubtitle}>
+              Still have questions? No worries, book a free call with our
+              accountants to assist you with any queries.
+            </Text>
           </View>
 
-          <View style={styles.faqCard}>
-            <View style={styles.faqHeader}>
-              <Text style={styles.faqTitle}>Frequently Asked Questions</Text>
+          <View style={styles.contactMethods}>
+            <View style={styles.contactMethod}>
+              <View style={styles.contactIcon}>
+                <CallIcon />
+              </View>
+              <View style={styles.contactInfo}>
+                <Text style={styles.contactLabel}>Phone</Text>
+                <Text style={styles.contactValue}>0800 00 1718</Text>
+              </View>
             </View>
 
-            <View style={styles.divider} />
+            <View style={styles.contactMethod}>
+              <View style={styles.contactIcon}>
+                <DirectoryIcon />
+              </View>
+              <View style={styles.contactInfo}>
+                <Text style={styles.contactLabel}>Email</Text>
+                <Text style={styles.contactValue}>accounts@lodg.co.nz</Text>
+              </View>
+            </View>
 
-            <View style={styles.faqContainer}>
-              {faqs.map((faq, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.faqItem}
-                  onPress={() => toggleFAQ(index)}
-                >
-                  <View style={styles.faqContent}>
-                    <View style={styles.faqQuestionRow}>
-                      <Text
-                        style={[
-                          styles.faqQuestion,
-                          expandedFAQ === index && styles.faqQuestionExpanded,
-                        ]}
-                      >
-                        {faq.question}
-                      </Text>
-                      <View style={styles.faqIcon}>
-                        <Ionicons
-                          name={
-                            expandedFAQ === index
-                              ? "chevron-up"
-                              : "chevron-down"
-                          }
-                          size={16}
-                          color="#999999"
-                        />
-                      </View>
+            <View style={styles.contactMethod}>
+              <View style={styles.contactIcon}>
+                <SocialsIcon />
+              </View>
+              <View style={styles.contactInfo}>
+                <Text style={styles.contactLabel}>Connect with Us</Text>
+                <Text style={styles.contactValue}>@lodg</Text>
+              </View>
+            </View>
+          </View>
+
+          <TouchableOpacity style={styles.bookCallButton}>
+            <Text style={styles.bookCallText}>Schedule a call</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.faqCard}>
+          <View style={styles.faqHeader}>
+            <Text style={styles.faqTitle}>Frequently Asked Questions</Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.faqContainer}>
+            {faqs.map((faq, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.faqItem}
+                onPress={() => toggleFAQ(index)}
+              >
+                <View style={styles.faqContent}>
+                  <View style={styles.faqQuestionRow}>
+                    <Text
+                      style={[
+                        styles.faqQuestion,
+                        expandedFAQ === index && styles.faqQuestionExpanded,
+                      ]}
+                    >
+                      {faq.question}
+                    </Text>
+                    <View style={styles.faqIcon}>
+                      <Ionicons
+                        name={
+                          expandedFAQ === index ? "chevron-up" : "chevron-down"
+                        }
+                        size={16}
+                        color="#999999"
+                      />
                     </View>
-                    {expandedFAQ === index && (
-                      <Text style={styles.faqAnswer}>{faq.answer}</Text>
-                    )}
                   </View>
-                </TouchableOpacity>
-              ))}
-            </View>
+                  {expandedFAQ === index && (
+                    <Text style={styles.faqAnswer}>{faq.answer}</Text>
+                  )}
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </PageLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F7F7F7",
-    paddingTop: 36,
-  },
-  scrollView: {
-    flex: 1,
-  },
   content: {
-    paddingHorizontal: 24,
     gap: 16,
     paddingBottom: 40,
   },

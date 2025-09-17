@@ -20,7 +20,7 @@ export default function PaymentsItem({ title, data }: PaymentsItemProps) {
       >
         <TransactionListHeader
           title={title}
-          onPress={() => router.push("/(tabs)/invoices")}
+          onPress={() => router.push("/(tabs)/(payments)/invoices")}
         />
       </View>
       <View style={styles.listContainer}>

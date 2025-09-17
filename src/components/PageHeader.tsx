@@ -2,17 +2,23 @@ import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ArrowSmallLeftIcon from "./icons/ArrowSmallLeftIcon";
 
-interface SettingsItemScreenHeaderProps {
+interface PageHeaderProps {
   breadcrumb: string;
   title: string;
+  onBackPress?: () => void;
 }
 
-export default function SettingsItemScreenHeader({
+export default function PageHeader({
   breadcrumb,
   title,
-}: SettingsItemScreenHeaderProps) {
+  onBackPress,
+}: PageHeaderProps) {
   const handleBackButtonPress = () => {
-    router.back();
+    if (onBackPress) {
+      onBackPress();
+    } else {
+      router.back();
+    }
   };
 
   return (
@@ -61,15 +67,14 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   breadcrumbText: {
-    fontFamily: "Open Sans",
+    fontFamily: "PlusJakartaSans",
     fontSize: 12,
     lineHeight: 18,
     color: "#676767",
     textAlign: "right",
   },
   pageTitle: {
-    fontFamily: "Helvetica",
-    fontWeight: "700",
+    fontFamily: "PlusJakartaSansBold",
     fontSize: 14,
     lineHeight: 20,
     color: "#222529",

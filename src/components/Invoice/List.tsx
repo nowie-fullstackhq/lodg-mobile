@@ -14,7 +14,7 @@ export default function List({ data }: ListProps) {
     <View>
       <TransactionListHeader
         title="Invoices"
-        onPress={() => router.push("/(tabs)/invoices")}
+        onPress={() => router.push("/(tabs)/(payments)/invoices")}
       />
       <View style={{ marginBottom: 40, gap: 16 }}>
         {data.length > 0 ? (

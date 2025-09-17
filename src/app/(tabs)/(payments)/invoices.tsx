@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Item from "@/components/Invoice/Item";
-import SettingsItemScreenHeader from "@/components/SettingsItemScreenHeader";
+import SettingsItemScreenHeader from "@/components/PageHeader";
+import PageLayout from "@/layouts/PageLayout";
 import { invoices as invoicesData } from "@/mock/invoices";
 import type { InvoiceData } from "@/types";
 import { parseDate } from "@/utils";
@@ -106,110 +107,92 @@ export default function InvoiceListScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        <SettingsItemScreenHeader
-          breadcrumb="Lodg / All Invoices"
-          title="Payments"
-        />
+    <PageLayout
+      breadcrumb="Lodg / All Invoices"
+      title="Payments"
+    >
+      <View style={styles.content}>
+        <View style={styles.tableContainer}>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableTitle}>Invoices</Text>
 
-        <View style={styles.mainContent}>
-          <View style={styles.tableContainer}>
-            <View style={styles.tableHeader}>
-              <Text style={styles.tableTitle}>Invoices</Text>
-
-              <TouchableOpacity
-                style={styles.datePickerContainer}
-                onPress={handleDatePickerPress}
-              >
-                <View style={styles.datePickerContent}>
-                  <Text style={styles.datePickerText}>{selectedDate}</Text>
-                  <View style={styles.datePickerIcon}>
-                    <Ionicons
-                      name="calendar-outline"
-                      size={16}
-                      color="#676767"
-                    />
-                  </View>
+            <TouchableOpacity
+              style={styles.datePickerContainer}
+              onPress={handleDatePickerPress}
+            >
+              <View style={styles.datePickerContent}>
+                <Text style={styles.datePickerText}>{selectedDate}</Text>
+                <View style={styles.datePickerIcon}>
+                  <Ionicons
+                    name="calendar-outline"
+                    size={16}
+                    color="#676767"
+                  />
                 </View>
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.actionButtons}>
+              <TouchableOpacity
+                style={styles.createButton}
+                onPress={handleCreatePress}
+              >
+                <Ionicons
+                  name="add"
+                  size={12}
+                  color="#FEFEFE"
+                />
+                <Text style={styles.buttonText}>Create</Text>
               </TouchableOpacity>
 
-              <View style={styles.actionButtons}>
-                <TouchableOpacity
-                  style={styles.createButton}
-                  onPress={handleCreatePress}
-                >
-                  <Ionicons
-                    name="add"
-                    size={12}
-                    color="#FEFEFE"
-                  />
-                  <Text style={styles.buttonText}>Create</Text>
-                </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.uploadButton}
+                onPress={handleUploadPress}
+              >
+                <Ionicons
+                  name="cloud-upload-outline"
+                  size={12}
+                  color="#FEFEFE"
+                />
+                <Text style={styles.buttonText}>Upload</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
+          <View style={styles.listContainer}>
+            <View style={styles.tabContainer}>
+              {tabs.map(tab => (
                 <TouchableOpacity
-                  style={styles.uploadButton}
-                  onPress={handleUploadPress}
+                  key={tab.id}
+                  style={[styles.tab, activeTab === tab.id && styles.activeTab]}
+                  onPress={() => setActiveTab(tab.id)}
                 >
-                  <Ionicons
-                    name="cloud-upload-outline"
-                    size={12}
-                    color="#FEFEFE"
-                  />
-                  <Text style={styles.buttonText}>Upload</Text>
+                  <Text
+                    style={[
+                      styles.tabText,
+                      activeTab === tab.id && styles.activeTabText,
+                    ]}
+                  >
+                    {tab.label}
+                  </Text>
                 </TouchableOpacity>
-              </View>
+              ))}
             </View>
 
-            <View style={styles.listContainer}>
-              <View style={styles.tabContainer}>
-                {tabs.map(tab => (
-                  <TouchableOpacity
-                    key={tab.id}
-                    style={[
-                      styles.tab,
-                      activeTab === tab.id && styles.activeTab,
-                    ]}
-                    onPress={() => setActiveTab(tab.id)}
-                  >
-                    <Text
-                      style={[
-                        styles.tabText,
-                        activeTab === tab.id && styles.activeTabText,
-                      ]}
-                    >
-                      {tab.label}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-
-              <View style={styles.invoiceList}>
-                {Object.entries(invoicesByMonth).map(([month, invoices]) =>
-                  renderMonthSection(month, invoices),
-                )}
-              </View>
+            <View style={styles.invoiceList}>
+              {Object.entries(invoicesByMonth).map(([month, invoices]) =>
+                renderMonthSection(month, invoices),
+              )}
             </View>
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </PageLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F7F7F7",
-  },
-  scrollView: {
-    flex: 1,
-  },
-  mainContent: {
-    paddingHorizontal: 24,
+  content: {
     gap: 16,
   },
   tableContainer: {
