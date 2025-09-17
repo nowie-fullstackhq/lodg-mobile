@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ArrowSmallLeftIcon from "./icons/ArrowSmallLeftIcon";
 
@@ -13,6 +13,8 @@ export default function PageHeader({
   title,
   onBackPress,
 }: PageHeaderProps) {
+  const router = useRouter();
+
   const handleBackButtonPress = () => {
     if (onBackPress) {
       onBackPress();

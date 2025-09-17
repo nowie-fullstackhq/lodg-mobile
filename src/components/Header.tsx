@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SettingsIcon from "./icons/SettingsIcon";
 
@@ -7,6 +7,7 @@ interface HeaderProps {
 }
 
 export default function Header({ username }: HeaderProps) {
+  const router = useRouter();
   const getInitials = (name: string) => {
     return name
       .split(" ")

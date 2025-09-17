@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { View } from "react-native";
 import type { InvoiceData } from "@/types";
 import NoData from "../NoData";
@@ -10,6 +10,8 @@ interface ListProps {
 }
 
 export default function List({ data }: ListProps) {
+  const router = useRouter();
+
   return (
     <View>
       <TransactionListHeader

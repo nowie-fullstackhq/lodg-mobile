@@ -1,4 +1,4 @@
-import { type Href, router } from "expo-router";
+import { type Href, useRouter } from "expo-router";
 import type React from "react";
 import { useState } from "react";
 import {
@@ -31,6 +31,7 @@ interface MenuItem {
 
 export default function SettingsScreen() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const router = useRouter();
 
   const menuItems: MenuItem[] = [
     {

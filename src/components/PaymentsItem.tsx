@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import type { InvoiceData } from "@/types";
 import Item from "./Invoice/Item";
@@ -11,6 +11,8 @@ interface PaymentsItemProps {
 }
 
 export default function PaymentsItem({ title, data }: PaymentsItemProps) {
+  const router = useRouter();
+
   return (
     <View style={styles.sectionContainer}>
       <View
