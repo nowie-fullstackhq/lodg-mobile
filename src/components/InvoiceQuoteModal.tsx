@@ -1,20 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
-import {
-  Dimensions,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CalculatorIcon from "./icons/CalculatorIcon";
-import CrossIcon from "./icons/CrossIcon";
 import PencilIcon from "./icons/PencilIcon";
 import ReceiptEditIcon from "./icons/ReceiptEditIcon";
 import ReceiptEditSmallIcon from "./icons/ReceiptEditSmallIcon";
 import SettingsThinIcon from "./icons/SettingsThinIcon";
-
-const { width } = Dimensions.get("window");
+import BaseModal from "./ui/Modal";
 
 interface InvoiceQuoteModalProps {
   visible: boolean;
@@ -30,163 +21,75 @@ export default function InvoiceQuoteModal({
   onGenerateInvoice,
 }: InvoiceQuoteModalProps) {
   return (
-    <Modal
+    <BaseModal
       visible={visible}
-      transparent
-      animationType="none"
-      onRequestClose={onClose}
+      onClose={onClose}
+      title="Send Quotes or Invoices"
+      subtitle="Easily create and send quotes for client approval or generate invoices to get paid faster."
+      icon={<ReceiptEditSmallIcon />}
     >
-      <View style={styles.overlay}>
-        <View style={styles.modal}>
-          <View style={styles.headerContainer}>
-            <View style={styles.contentContainer}>
-              <View style={styles.titleContainer}>
-                <View style={styles.iconContainer}>
-                  <ReceiptEditSmallIcon />
-                </View>
-                <Text style={styles.title}>Send Quotes or Invoices</Text>
-              </View>
-              <Text style={styles.subtitle}>
-                Easily create and send quotes for client approval or generate
-                invoices to get paid faster.
+      <View style={styles.optionsContainer}>
+        <TouchableOpacity
+          style={styles.primaryOption}
+          onPress={onCreateQuote}
+        >
+          <View style={styles.optionIconContainer}>
+            <View style={styles.primaryIconBackground}>
+              <CalculatorIcon />
+            </View>
+            <View style={styles.badge}>
+              <PencilIcon />
+            </View>
+          </View>
+          <View style={styles.optionContent}>
+            <View style={styles.optionTextContainer}>
+              <Text style={styles.optionTitle}>Create Quote</Text>
+              <Text style={styles.optionDescription}>
+                Send a detailed price quote to your client for review before
+                finalizing payment.
               </Text>
             </View>
-            <TouchableOpacity
-              onPress={onClose}
-              style={styles.closeButton}
-            >
-              <CrossIcon />
-            </TouchableOpacity>
+            <Ionicons
+              name="chevron-forward"
+              size={16}
+              color="#2256CB"
+            />
           </View>
+        </TouchableOpacity>
 
-          <View style={styles.divider} />
-
-          <View style={styles.optionsContainer}>
-            <TouchableOpacity
-              style={styles.primaryOption}
-              onPress={onCreateQuote}
-            >
-              <View style={styles.optionIconContainer}>
-                <View style={styles.primaryIconBackground}>
-                  <CalculatorIcon />
-                </View>
-                <View style={styles.badge}>
-                  <PencilIcon />
-                </View>
-              </View>
-              <View style={styles.optionContent}>
-                <View style={styles.optionTextContainer}>
-                  <Text style={styles.optionTitle}>Create Quote</Text>
-                  <Text style={styles.optionDescription}>
-                    Send a detailed price quote to your client for review before
-                    finalizing payment.
-                  </Text>
-                </View>
-                <Ionicons
-                  name="chevron-forward"
-                  size={16}
-                  color="#2256CB"
-                />
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.secondaryOption}
-              onPress={onGenerateInvoice}
-            >
-              <View style={styles.optionIconContainer}>
-                <View style={styles.secondaryIconBackground}>
-                  <ReceiptEditIcon />
-                </View>
-                <View style={styles.badge}>
-                  <SettingsThinIcon />
-                </View>
-              </View>
-              <View style={styles.optionContent}>
-                <View style={styles.optionTextContainer}>
-                  <Text style={styles.optionTitle}>Generate Invoice</Text>
-                  <Text style={styles.optionDescription}>
-                    Generate and send an invoice to your employer or client to
-                    get paid
-                  </Text>
-                </View>
-                <Ionicons
-                  name="chevron-forward"
-                  size={16}
-                  color="#2256CB"
-                />
-              </View>
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.secondaryOption}
+          onPress={onGenerateInvoice}
+        >
+          <View style={styles.optionIconContainer}>
+            <View style={styles.secondaryIconBackground}>
+              <ReceiptEditIcon />
+            </View>
+            <View style={styles.badge}>
+              <SettingsThinIcon />
+            </View>
           </View>
-        </View>
+          <View style={styles.optionContent}>
+            <View style={styles.optionTextContainer}>
+              <Text style={styles.optionTitle}>Generate Invoice</Text>
+              <Text style={styles.optionDescription}>
+                Generate and send an invoice to your employer or client to get
+                paid
+              </Text>
+            </View>
+            <Ionicons
+              name="chevron-forward"
+              size={16}
+              color="#2256CB"
+            />
+          </View>
+        </TouchableOpacity>
       </View>
-    </Modal>
+    </BaseModal>
   );
 }
 
 const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    justifyContent: "flex-end",
-  },
-  modal: {
-    backgroundColor: "#FEFEFE",
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: 24,
-    width: width,
-    minHeight: 537,
-    gap: 24,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 12,
-  },
-  contentContainer: {
-    flex: 1,
-    gap: 8,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  iconContainer: {
-    width: 28,
-    height: 28,
-    backgroundColor: "#F7F7F7",
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontFamily: "PlusJakartaSansBold",
-    fontSize: 16,
-    lineHeight: 24,
-    letterSpacing: 0.32,
-    color: "#222529",
-    flex: 1,
-  },
-  subtitle: {
-    fontFamily: "PlusJakartaSans",
-    fontSize: 12,
-    lineHeight: 18,
-    color: "#676767",
-  },
-  closeButton: {
-    width: 24,
-    height: 24,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  divider: {
-    height: 1,
-    backgroundColor: "#EDEDED",
-  },
   optionsContainer: {
     gap: 16,
   },
