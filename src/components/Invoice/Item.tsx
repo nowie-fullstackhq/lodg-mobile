@@ -1,4 +1,5 @@
-import { StyleSheet, View } from "react-native";
+import { useRouter } from "expo-router";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import type { InvoiceData } from "@/types";
 import { formatDisplayDate } from "@/utils";
 import TransactionAmount from "../TransactionAmount";
@@ -11,12 +12,23 @@ interface ItemProps {
 }
 
 export default function Item({ invoice, showBorder = true }: ItemProps) {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push({
+      pathname: "/(tabs)/(payments)/invoices/[id]",
+      params: { id: invoice.id },
+    });
+  };
+
   return (
-    <View
+    <TouchableOpacity
       style={[
         styles.container,
         showBorder ? styles.borderedContainer : styles.noBorder,
       ]}
+      onPress={handlePress}
+      activeOpacity={0.7}
     >
       <Avatar
         username={invoice.clientName}
@@ -31,7 +43,7 @@ export default function Item({ invoice, showBorder = true }: ItemProps) {
         currency={invoice.currency}
         status={invoice.status}
       />
-    </View>
+    </TouchableOpacity>
   );
 }
 

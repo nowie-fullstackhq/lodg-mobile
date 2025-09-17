@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import CalendarIcon from "@/components/icons/CalendarIcon";
 import ExpensesIcon from "@/components/icons/ExpensesIcon";
@@ -7,6 +7,8 @@ import PaymentsIcon from "@/components/icons/PaymentsIcon";
 import TabBarItem from "@/components/TabBarItem";
 
 export default function TabLayout() {
+  const router = useRouter();
+
   return (
     <Tabs
       screenOptions={{
@@ -68,6 +70,17 @@ export default function TabLayout() {
               title="Payments"
               focused={focused}
             />
+          ),
+          tabBarButton: ({ children }) => (
+            <Pressable
+              onPress={() => router.replace("/(tabs)/(payments)")}
+              style={{ justifyContent: "center", alignItems: "center" }}
+              android_ripple={{
+                foreground: true,
+              }}
+            >
+              {children}
+            </Pressable>
           ),
         }}
       />
