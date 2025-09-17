@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CreateInvoiceModal from "@/components/CreateInvoiceModal";
 import Item from "@/components/Invoice/Item";
 import SettingsItemScreenHeader from "@/components/PageHeader";
+import UploadInvoiceModal from "@/components/UploadInvoiceModal";
 import PageLayout from "@/layouts/PageLayout";
 import { invoices as invoicesData } from "@/mock/invoices";
 import type { InvoiceData } from "@/types";
@@ -69,6 +70,7 @@ export default function InvoiceListScreen() {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedDate, setSelectedDate] = useState("Select Date Range");
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
 
   const filteredInvoices = filterInvoicesByTab(invoicesData, activeTab);
   const invoicesByMonth = groupInvoicesByMonth(filteredInvoices);
@@ -82,7 +84,11 @@ export default function InvoiceListScreen() {
   };
 
   const handleUploadPress = () => {
-    console.log("Upload invoice pressed");
+    setShowUploadModal(true);
+  };
+
+  const handleUploadInvoice = (data: any) => {
+    console.log("Uploading invoice with data:", data);
   };
 
   const handleDatePickerPress = () => {
@@ -202,7 +208,11 @@ export default function InvoiceListScreen() {
       <CreateInvoiceModal
         visible={showCreateModal}
         onClose={() => setShowCreateModal(false)}
-        onCreateInvoice={handleCreateInvoice}
+      />
+
+      <UploadInvoiceModal
+        visible={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
       />
     </>
   );

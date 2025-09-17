@@ -1,95 +1,31 @@
 import { Ionicons } from "@expo/vector-icons";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import BaseModal from "./ui/Modal";
 import ReceiptEditSmallIcon from "./icons/ReceiptEditSmallIcon";
+import BaseModal from "./ui/Modal";
 
 interface CreateInvoiceModalProps {
   visible: boolean;
   onClose: () => void;
-  onCreateInvoice: (data: InvoiceFormData) => void;
-}
-
-interface InvoiceFormData {
-  clientName: string;
-  clientEmail: string;
-  invoiceDate: Date;
-  unitPrice: string;
-  quantity: string;
-  description: string;
-  notes: string;
-  includeGST: boolean;
 }
 
 export default function CreateInvoiceModal({
   visible,
   onClose,
-  onCreateInvoice,
 }: CreateInvoiceModalProps) {
-  const [formData, setFormData] = useState<InvoiceFormData>({
-    clientName: "",
-    clientEmail: "",
-    invoiceDate: new Date(),
-    unitPrice: "",
-    quantity: "",
-    description: "",
-    notes: "",
-    includeGST: false,
-  });
-
-  const [showDatePicker, setShowDatePicker] = useState(false);
-
-  const handleInputChange = (
-    field: keyof InvoiceFormData,
-    value: string | boolean | Date,
-  ) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleDateChange = (event: any, selectedDate?: Date) => {
-    setShowDatePicker(Platform.OS === "ios");
-    if (selectedDate) {
-      handleInputChange("invoiceDate", selectedDate);
-    }
-  };
-
-  const formatDate = (date: Date): string => {
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
-  const handleCreateInvoice = () => {
-    onCreateInvoice(formData);
-    onClose();
-    setFormData({
-      clientName: "",
-      clientEmail: "",
-      invoiceDate: new Date(),
-      unitPrice: "NZD",
-      quantity: "",
-      description: "",
-      notes: "",
-      includeGST: false,
-    });
-  };
-
-  const handleCancel = () => {
-    onClose();
-  };
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [unitPrice, setUnitPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [description, setDescription] = useState("");
+  const [notes, setNotes] = useState("");
+  const [includeGST, setIncludeGST] = useState(false);
 
   const renderTextInput = (
     label: string,
@@ -116,20 +52,10 @@ export default function CreateInvoiceModal({
   const renderDatePicker = () => (
     <View style={styles.textField}>
       <Text style={styles.label}>Invoice Due Date</Text>
-      <TouchableOpacity
-        style={styles.inputContainer}
-        onPress={() => setShowDatePicker(true)}
-      >
+      <TouchableOpacity style={styles.inputContainer}>
         <View style={styles.datePickerContent}>
-          <Text
-            style={[
-              styles.input,
-              { color: formData.invoiceDate ? "#363636" : "#ADADAD" },
-            ]}
-          >
-            {formData.invoiceDate
-              ? formatDate(formData.invoiceDate)
-              : "Select invoice date"}
+          <Text style={[styles.input, { color: "#ADADAD" }]}>
+            Select invoice date
           </Text>
           <Ionicons
             name="calendar-outline"
@@ -138,15 +64,6 @@ export default function CreateInvoiceModal({
           />
         </View>
       </TouchableOpacity>
-
-      {showDatePicker && (
-        <DateTimePicker
-          value={formData.invoiceDate}
-          mode="date"
-          display={Platform.OS === "ios" ? "spinner" : "default"}
-          onChange={handleDateChange}
-        />
-      )}
     </View>
   );
 
@@ -197,24 +114,22 @@ export default function CreateInvoiceModal({
       onClose={onClose}
       title="Create and send invoice"
       subtitle="Generate and send an invoice to your employer or client to get paid"
-      icon={
-        <ReceiptEditSmallIcon />
-      }
+      icon={<ReceiptEditSmallIcon />}
       showDivider={true}
     >
       <View style={styles.formContainer}>
         <View style={styles.formFields}>
           {renderTextInput(
-            "Your Client’s  Full Name",
-            formData.clientName,
-            text => handleInputChange("clientName", text),
+            "Your Client's  Full Name",
+            clientName,
+            setClientName,
             "Enter client name",
           )}
 
           {renderTextInput(
-            "Your Client’s Email",
-            formData.clientEmail,
-            text => handleInputChange("clientEmail", text),
+            "Your Client's Email",
+            clientEmail,
+            setClientEmail,
             "Enter client email address",
             "email-address",
           )}
@@ -223,15 +138,10 @@ export default function CreateInvoiceModal({
 
           <View style={styles.checkboxContainer}>
             <TouchableOpacity
-              style={[
-                styles.checkbox,
-                formData.includeGST && styles.checkboxChecked,
-              ]}
-              onPress={() =>
-                handleInputChange("includeGST", !formData.includeGST)
-              }
+              style={[styles.checkbox, includeGST && styles.checkboxChecked]}
+              onPress={() => setIncludeGST(!includeGST)}
             >
-              {formData.includeGST && (
+              {includeGST && (
                 <Ionicons
                   name="checkmark"
                   size={12}
@@ -253,19 +163,19 @@ export default function CreateInvoiceModal({
 
           {renderTextInput(
             "Description",
-            formData.description,
-            text => handleInputChange("description", text),
+            description,
+            setDescription,
             "Description goes here",
           )}
 
-         {renderRowInputs(
+          {renderRowInputs(
             "Quantity",
-            formData.quantity,
-            text => handleInputChange("quantity", text),
+            quantity,
+            setQuantity,
             "Enter quantity",
-            "Unit Price", 
-            formData.unitPrice,
-            text => handleInputChange("unitPrice", text),
+            "Unit Price",
+            unitPrice,
+            setUnitPrice,
             "Enter unit price",
           )}
 
@@ -282,24 +192,18 @@ export default function CreateInvoiceModal({
 
           {renderTextInput(
             "Additional Notes",
-            formData.notes,
-            text => handleInputChange("notes", text),
+            notes,
+            setNotes,
             "Add any additional notes or terms",
           )}
         </View>
 
         <View style={styles.actionButtons}>
-          <TouchableOpacity
-            style={styles.cancelButton}
-            onPress={handleCancel}
-          >
+          <TouchableOpacity style={styles.cancelButton}>
             <Text style={styles.cancelButtonText}>Cancel</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.createButton}
-            onPress={handleCreateInvoice}
-          >
+          <TouchableOpacity style={styles.createButton}>
             <Text style={styles.createButtonText}>Preview Invoice</Text>
           </TouchableOpacity>
         </View>
