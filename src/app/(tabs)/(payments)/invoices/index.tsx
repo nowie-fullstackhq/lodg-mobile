@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CreateInvoiceModal from "@/components/CreateInvoiceModal";
 import Item from "@/components/Invoice/Item";
 import SettingsItemScreenHeader from "@/components/PageHeader";
 import PageLayout from "@/layouts/PageLayout";
@@ -67,12 +68,17 @@ const tabs = [
 export default function InvoiceListScreen() {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedDate, setSelectedDate] = useState("Select Date Range");
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const filteredInvoices = filterInvoicesByTab(invoicesData, activeTab);
   const invoicesByMonth = groupInvoicesByMonth(filteredInvoices);
 
   const handleCreatePress = () => {
-    console.log("Create invoice pressed");
+    setShowCreateModal(true);
+  };
+
+  const handleCreateInvoice = (data: any) => {
+    console.log("Creating invoice with data:", data);
   };
 
   const handleUploadPress = () => {
@@ -107,87 +113,98 @@ export default function InvoiceListScreen() {
   );
 
   return (
-    <PageLayout
-      breadcrumb="Lodg / All Invoices"
-      title="Payments"
-    >
-      <View style={styles.content}>
-        <View style={styles.tableContainer}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableTitle}>Invoices</Text>
+    <>
+      <PageLayout
+        breadcrumb="Lodg / All Invoices"
+        title="Payments"
+      >
+        <View style={styles.content}>
+          <View style={styles.tableContainer}>
+            <View style={styles.tableHeader}>
+              <Text style={styles.tableTitle}>Invoices</Text>
 
-            <TouchableOpacity
-              style={styles.datePickerContainer}
-              onPress={handleDatePickerPress}
-            >
-              <View style={styles.datePickerContent}>
-                <Text style={styles.datePickerText}>{selectedDate}</Text>
-                <View style={styles.datePickerIcon}>
-                  <Ionicons
-                    name="calendar-outline"
-                    size={16}
-                    color="#676767"
-                  />
+              <TouchableOpacity
+                style={styles.datePickerContainer}
+                onPress={handleDatePickerPress}
+              >
+                <View style={styles.datePickerContent}>
+                  <Text style={styles.datePickerText}>{selectedDate}</Text>
+                  <View style={styles.datePickerIcon}>
+                    <Ionicons
+                      name="calendar-outline"
+                      size={16}
+                      color="#676767"
+                    />
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-
-            <View style={styles.actionButtons}>
-              <TouchableOpacity
-                style={styles.createButton}
-                onPress={handleCreatePress}
-              >
-                <Ionicons
-                  name="add"
-                  size={12}
-                  color="#FEFEFE"
-                />
-                <Text style={styles.buttonText}>Create</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.uploadButton}
-                onPress={handleUploadPress}
-              >
-                <Ionicons
-                  name="cloud-upload-outline"
-                  size={12}
-                  color="#FEFEFE"
-                />
-                <Text style={styles.buttonText}>Upload</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View style={styles.listContainer}>
-            <View style={styles.tabContainer}>
-              {tabs.map(tab => (
+              <View style={styles.actionButtons}>
                 <TouchableOpacity
-                  key={tab.id}
-                  style={[styles.tab, activeTab === tab.id && styles.activeTab]}
-                  onPress={() => setActiveTab(tab.id)}
+                  style={styles.createButton}
+                  onPress={handleCreatePress}
                 >
-                  <Text
-                    style={[
-                      styles.tabText,
-                      activeTab === tab.id && styles.activeTabText,
-                    ]}
-                  >
-                    {tab.label}
-                  </Text>
+                  <Ionicons
+                    name="add"
+                    size={12}
+                    color="#FEFEFE"
+                  />
+                  <Text style={styles.buttonText}>Create</Text>
                 </TouchableOpacity>
-              ))}
+
+                <TouchableOpacity
+                  style={styles.uploadButton}
+                  onPress={handleUploadPress}
+                >
+                  <Ionicons
+                    name="cloud-upload-outline"
+                    size={12}
+                    color="#FEFEFE"
+                  />
+                  <Text style={styles.buttonText}>Upload</Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
-            <View style={styles.invoiceList}>
-              {Object.entries(invoicesByMonth).map(([month, invoices]) =>
-                renderMonthSection(month, invoices),
-              )}
+            <View style={styles.listContainer}>
+              <View style={styles.tabContainer}>
+                {tabs.map(tab => (
+                  <TouchableOpacity
+                    key={tab.id}
+                    style={[
+                      styles.tab,
+                      activeTab === tab.id && styles.activeTab,
+                    ]}
+                    onPress={() => setActiveTab(tab.id)}
+                  >
+                    <Text
+                      style={[
+                        styles.tabText,
+                        activeTab === tab.id && styles.activeTabText,
+                      ]}
+                    >
+                      {tab.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              <View style={styles.invoiceList}>
+                {Object.entries(invoicesByMonth).map(([month, invoices]) =>
+                  renderMonthSection(month, invoices),
+                )}
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </PageLayout>
+      </PageLayout>
+
+      <CreateInvoiceModal
+        visible={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onCreateInvoice={handleCreateInvoice}
+      />
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import {
   Dimensions,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,7 +10,7 @@ import {
 } from "react-native";
 import CrossIcon from "../icons/CrossIcon";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 interface BaseModalProps {
   visible: boolean;
@@ -67,11 +68,9 @@ export default function BaseModal({
             )}
           </View>
 
-          {/* Divider */}
           {showDivider && <View style={styles.divider} />}
 
-          {/* Content */}
-          {children}
+          <ScrollView>{children}</ScrollView>
         </View>
       </View>
     </Modal>
@@ -96,6 +95,7 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     paddingBottom: 24,
     width: width,
+    maxHeight: height - 150,
   },
   centerModal: {
     borderRadius: 14,
