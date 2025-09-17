@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import type { InvoiceData } from "@/types";
+import { formatDisplayDate } from "@/utils";
 import TransactionAmount from "../TransactionAmount";
 import TransactionDetails from "../TransactionDetails";
 import Avatar from "./Avatar";
@@ -23,7 +24,7 @@ export default function Item({ invoice, showBorder = true }: ItemProps) {
       />
       <TransactionDetails
         clientName={invoice.clientName}
-        date={invoice.date}
+        date={formatDisplayDate(invoice.date)}
       />
       <TransactionAmount
         amount={invoice.amount}

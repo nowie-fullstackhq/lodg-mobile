@@ -107,6 +107,13 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="invoices"
+        options={{
+          href: null,
+          title: "Invoices",
+        }}
+      />
     </Tabs>
   );
 }

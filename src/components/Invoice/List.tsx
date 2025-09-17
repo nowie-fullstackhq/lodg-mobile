@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { View } from "react-native";
 import type { InvoiceData } from "@/types";
 import NoData from "../NoData";
@@ -13,11 +14,11 @@ export default function List({ data }: ListProps) {
     <View>
       <TransactionListHeader
         title="Invoices"
-        onPress={() => {}}
+        onPress={() => router.push("/(tabs)/invoices")}
       />
       <View style={{ marginBottom: 40, gap: 16 }}>
         {data.length > 0 ? (
-          data.map(item => (
+          data.slice(0, 5).map(item => (
             <Item
               key={item.id}
               invoice={item}

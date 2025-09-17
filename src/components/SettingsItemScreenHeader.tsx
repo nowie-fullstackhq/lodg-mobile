@@ -12,7 +12,7 @@ export default function SettingsItemScreenHeader({
   title,
 }: SettingsItemScreenHeaderProps) {
   const handleBackButtonPress = () => {
-    router.push("/settings");
+    router.back();
   };
 
   return (
