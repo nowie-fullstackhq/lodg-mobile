@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import type { InvoiceData } from "@/types";
 import Item from "./Invoice/Item";
@@ -19,7 +20,7 @@ export default function PaymentsItem({ title, data }: PaymentsItemProps) {
       >
         <TransactionListHeader
           title={title}
-          onPress={() => {}}
+          onPress={() => router.push("/(tabs)/invoices")}
         />
       </View>
       <View style={styles.listContainer}>

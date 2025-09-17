@@ -41,6 +41,22 @@ const groupInvoicesByMonth = (
   return groups;
 };
 
+const filterInvoicesByTab = (
+  invoices: InvoiceData[],
+  activeTab: string,
+): InvoiceData[] => {
+  switch (activeTab) {
+    case "all":
+      return invoices;
+    case "generated":
+      return invoices.filter(invoice => invoice.status !== "uploaded");
+    case "uploaded":
+      return invoices.filter(invoice => invoice.status === "uploaded");
+    default:
+      return invoices;
+  }
+};
+
 const tabs = [
   { id: "all", label: "All", active: true },
   { id: "generated", label: "Generated", active: false },
@@ -51,7 +67,8 @@ export default function InvoiceListScreen() {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedDate, setSelectedDate] = useState("Select Date Range");
 
-  const invoicesByMonth = groupInvoicesByMonth(invoicesData);
+  const filteredInvoices = filterInvoicesByTab(invoicesData, activeTab);
+  const invoicesByMonth = groupInvoicesByMonth(filteredInvoices);
 
   const handleCreatePress = () => {
     console.log("Create invoice pressed");
