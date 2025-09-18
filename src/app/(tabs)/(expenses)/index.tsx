@@ -1,6 +1,8 @@
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import ActionMethodCard from "@/components/ActionMethodCard";
+import AddExpensesModal from "@/components/AddExpenseModal";
 import AIChipIcon from "@/components/icons/AIChipIcon";
 import ReceiptItemIcon from "@/components/icons/ReceiptItemIcon";
 import TransactionItem from "@/components/TransactionItem";
@@ -8,6 +10,7 @@ import MainLayout from "@/layouts/MainLayout";
 import { expenses } from "@/mock/expenses";
 
 export default function ExpensesScreen() {
+  const [showExpenseModal, setShowAddExpenseModal] = useState(false);
   const router = useRouter();
 
   const methods = [
@@ -17,7 +20,7 @@ export default function ExpensesScreen() {
       title: "Add expenses",
       description:
         "Simply upload a receipt of any work-related costs that you have made.",
-      onPress: () => {},
+      onPress: () => setShowAddExpenseModal(true),
     },
     {
       id: "2",
@@ -30,20 +33,27 @@ export default function ExpensesScreen() {
   ];
 
   return (
-    <MainLayout username="John Doe">
-      <View style={styles.content}>
-        <ActionMethodCard
-          title="Manage expenses on Lodg"
-          methods={methods}
-        />
-        <TransactionItem
-          title="Expenses"
-          data={expenses}
-          type="expense"
-          onPress={() => router.push("/(tabs)/(expenses)/expenses")}
-        />
-      </View>
-    </MainLayout>
+    <>
+      <MainLayout username="John Doe">
+        <View style={styles.content}>
+          <ActionMethodCard
+            title="Manage expenses on Lodg"
+            methods={methods}
+          />
+          <TransactionItem
+            title="Expenses"
+            data={expenses}
+            type="expense"
+            onPress={() => router.push("/(tabs)/(expenses)/expenses")}
+          />
+        </View>
+      </MainLayout>
+
+      <AddExpensesModal
+        visible={showExpenseModal}
+        onClose={() => setShowAddExpenseModal(false)}
+      />
+    </>
   );
 }
 
