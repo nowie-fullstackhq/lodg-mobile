@@ -1,43 +1,60 @@
-import { useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
-import type { InvoiceData } from "@/types";
-import Item from "./Invoice/Item";
+import type { ExpenseData, InvoiceData } from "@/types";
+import ExpenseItem from "./Expenses/Item";
+import InvoiceItem from "./Invoice/Item";
 import NoData from "./NoData";
 import TransactionListHeader from "./TransactionListHeader";
 
-interface PaymentsItemProps {
+type TransactionData = InvoiceData | ExpenseData;
+
+interface TransactionItemProps {
   title: string;
-  data: InvoiceData[];
+  data: TransactionData[];
+  type: "invoice" | "expense";
+  onPress: () => void;
 }
 
-export default function PaymentsItem({ title, data }: PaymentsItemProps) {
-  const router = useRouter();
+export default function TransactionItem({
+  title,
+  data,
+  type,
+  onPress,
+}: TransactionItemProps) {
+  const renderItem = (item: TransactionData, showBorder: boolean) => {
+    if (type === "invoice") {
+      return (
+        <InvoiceItem
+          invoice={item as InvoiceData}
+          showBorder={showBorder}
+        />
+      );
+    }
+    return (
+      <ExpenseItem
+        expense={item as ExpenseData}
+        showBorder={showBorder}
+      />
+    );
+  };
 
   return (
     <View style={styles.sectionContainer}>
-      <View
-        style={{
-          paddingHorizontal: 20,
-        }}
-      >
+      <View style={styles.headerContainer}>
         <TransactionListHeader
           title={title}
-          onPress={() => router.push("/(tabs)/(payments)/invoices")}
+          onPress={onPress}
         />
       </View>
       <View style={styles.listContainer}>
         <View style={styles.divider} />
         <View style={styles.listContent}>
           {data.length > 0 ? (
-            data.map((invoice, index) => (
+            data.map((item, index) => (
               <View
-                key={invoice.id}
+                key={item.id}
                 style={[index < data.length - 1 && styles.itemWithBorder]}
               >
-                <Item
-                  invoice={invoice}
-                  showBorder={false}
-                />
+                {renderItem(item, false)}
               </View>
             ))
           ) : (
@@ -53,6 +70,9 @@ const styles = StyleSheet.create({
   sectionContainer: {
     backgroundColor: "#FEFEFE",
     borderRadius: 14,
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
   },
   listContainer: {
     gap: 16,

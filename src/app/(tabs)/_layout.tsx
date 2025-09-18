@@ -85,7 +85,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="expenses"
+        name="(expenses)"
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarItem
@@ -99,6 +99,17 @@ export default function TabLayout() {
               title="Expenses"
               focused={focused}
             />
+          ),
+          tabBarButton: ({ children }) => (
+            <Pressable
+              onPress={() => router.replace("/(tabs)/(expenses)")}
+              style={{ justifyContent: "center", alignItems: "center" }}
+              android_ripple={{
+                foreground: true,
+              }}
+            >
+              {children}
+            </Pressable>
           ),
         }}
       />

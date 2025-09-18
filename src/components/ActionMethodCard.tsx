@@ -1,11 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import type { ReactNode } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import CardReceivedIcon from "./icons/CardReceivedIcon";
-import MoneyIcon from "./icons/MoneyIcon";
-import ReceiptEditSmallIcon from "./icons/ReceiptEditSmallIcon";
 
-interface PaymentMethod {
+interface ActionMethod {
   id: string;
   icon: ReactNode;
   title: string;
@@ -13,44 +10,24 @@ interface PaymentMethod {
   onPress: () => void;
 }
 
-interface PaymentMethodCardProps {
-  onSendQuotesPress: () => void;
+interface ActionMethodCardProps {
+  title: string;
+  methods: ActionMethod[];
+  containerStyle?: object;
+  showChevron?: boolean;
 }
 
-export default function PaymentMethodCard({
-  onSendQuotesPress,
-}: PaymentMethodCardProps) {
-  const paymentMethods: PaymentMethod[] = [
-    {
-      id: "1",
-      icon: <ReceiptEditSmallIcon />,
-      title: "Send Quotes or Invoices",
-      description:
-        "Easily create and send quotes for client approval or generate invoices to get paid faster.",
-      onPress: onSendQuotesPress,
-    },
-    {
-      id: "2",
-      icon: <MoneyIcon />,
-      title: "Upload an invoice",
-      description:
-        "Already been paid? No troubles. Simply upload the invoice you sent to your employer or client",
-      onPress: () => {},
-    },
-    {
-      id: "3",
-      icon: <CardReceivedIcon />,
-      title: "Direct debit",
-      description:
-        "Get your employer or client to pay you into your Lodg account",
-      onPress: () => {},
-    },
-  ];
+export default function ActionMethodCard({
+  title,
+  methods,
+  containerStyle,
+  showChevron = true,
+}: ActionMethodCardProps) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Receive payments to Lodg</Text>
+    <View style={[styles.container, containerStyle]}>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.methodsContainer}>
-        {paymentMethods.map(method => (
+        {methods.map(method => (
           <TouchableOpacity
             key={method.id}
             style={styles.methodItem}
@@ -61,11 +38,13 @@ export default function PaymentMethodCard({
               <Text style={styles.methodTitle}>{method.title}</Text>
               <Text style={styles.methodDescription}>{method.description}</Text>
             </View>
-            <Ionicons
-              name="chevron-forward"
-              size={16}
-              color="#999999"
-            />
+            {showChevron && (
+              <Ionicons
+                name="chevron-forward"
+                size={16}
+                color="#999999"
+              />
+            )}
           </TouchableOpacity>
         ))}
       </View>

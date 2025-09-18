@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { View } from "react-native";
 import type { ExpenseData } from "@/types";
 import NoData from "../NoData";
@@ -9,11 +10,13 @@ interface ListProps {
 }
 
 export default function List({ data }: ListProps) {
+  const router = useRouter();
+
   return (
     <View>
       <TransactionListHeader
         title="Expenses"
-        onPress={() => {}}
+        onPress={() => router.push("/(tabs)/(expenses)/expenses")}
       />
       <View style={{ marginBottom: 40, gap: 16 }}>
         {data.length > 0 ? (
@@ -21,6 +24,7 @@ export default function List({ data }: ListProps) {
             <Item
               key={item.id}
               expense={item}
+              showBorder
             />
           ))
         ) : (
