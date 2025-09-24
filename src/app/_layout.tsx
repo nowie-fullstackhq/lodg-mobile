@@ -7,6 +7,8 @@ import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
+const isLoggedIn = false;
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     PlusJakartaSansBold: require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
@@ -35,10 +37,18 @@ export default function RootLayout() {
           headerShown: false,
         }}
       >
-        <Stack.Screen
-          name="(tabs)"
-          options={{ headerShown: false }}
-        />
+        <Stack.Protected guard={!isLoggedIn}>
+          <Stack.Screen
+            name="login"
+            options={{ headerShown: false }}
+          />
+        </Stack.Protected>
+        <Stack.Protected guard={isLoggedIn}>
+          <Stack.Screen
+            name="(tabs)"
+            options={{ headerShown: false }}
+          />
+        </Stack.Protected>
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
