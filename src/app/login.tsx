@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useState } from "react";
 import {
+  Dimensions,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -13,6 +14,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -160,7 +163,7 @@ const styles = StyleSheet.create({
     minHeight: 756,
   },
   loginForm: {
-    width: 327,
+    width: width - 60,
     backgroundColor: "#FFFFFF",
     borderRadius: 23,
     alignSelf: "center",

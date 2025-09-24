@@ -7,7 +7,8 @@ import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
-const isLoggedIn = false;
+const isLoggedIn = true;
+const hasSubscription = false;
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -42,13 +43,26 @@ export default function RootLayout() {
             name="login"
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="signup"
+            options={{ headerShown: false }}
+          />
         </Stack.Protected>
-        <Stack.Protected guard={isLoggedIn}>
+
+        <Stack.Protected guard={isLoggedIn && !hasSubscription}>
+          <Stack.Screen
+            name="subscription-notice"
+            options={{ headerShown: false }}
+          />
+        </Stack.Protected>
+
+        <Stack.Protected guard={isLoggedIn && hasSubscription}>
           <Stack.Screen
             name="(tabs)"
             options={{ headerShown: false }}
           />
         </Stack.Protected>
+
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
