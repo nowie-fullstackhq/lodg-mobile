@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
 import { useState } from "react";
 import {
   Image,
@@ -14,21 +13,27 @@ import {
   View,
 } from "react-native";
 
-export default function LoginScreen() {
+export default function SignUpScreen() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleLogin = () => {
-    console.log("Login pressed", { email, password });
-  };
-
-  const handleForgotPassword = () => {
-    console.log("Forgot password pressed");
-  };
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSignUp = () => {
-    console.log("Sign up pressed");
+    console.log("Sign up pressed", {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    });
+  };
+
+  const handleLogin = () => {
+    console.log("Login pressed");
   };
 
   return (
@@ -41,7 +46,7 @@ export default function LoginScreen() {
           contentContainerStyle={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.loginForm}>
+          <View style={styles.signUpForm}>
             <View style={styles.content}>
               <View style={styles.logo}>
                 <Image source={require("@/assets/lodg.png")} />
@@ -50,16 +55,45 @@ export default function LoginScreen() {
               <View style={styles.formContainer}>
                 <View style={styles.intro}>
                   <View style={styles.titleContainer}>
-                    <Text style={styles.welcomeTitle}>Welcome back! 👋</Text>
+                    <Text style={styles.welcomeTitle}>Create Account 🚀</Text>
                   </View>
                   <Text style={styles.subtitle}>
-                    Sign in to your customer portal to start managing your
-                    taxes.
+                    Join us today and start managing your taxes with ease.
                   </Text>
                 </View>
 
                 <View style={styles.form}>
                   <View style={styles.inputsContainer}>
+                    <View style={styles.nameRow}>
+                      <View style={styles.nameInputGroup}>
+                        <Text style={styles.label}>First Name</Text>
+                        <View style={styles.nameInputField}>
+                          <TextInput
+                            style={styles.textInput}
+                            placeholder="First name"
+                            placeholderTextColor="#C8C8C8"
+                            value={firstName}
+                            onChangeText={setFirstName}
+                            autoCapitalize="words"
+                          />
+                        </View>
+                      </View>
+
+                      <View style={styles.nameInputGroup}>
+                        <Text style={styles.label}>Last Name</Text>
+                        <View style={styles.nameInputField}>
+                          <TextInput
+                            style={styles.textInput}
+                            placeholder="Last name"
+                            placeholderTextColor="#C8C8C8"
+                            value={lastName}
+                            onChangeText={setLastName}
+                            autoCapitalize="words"
+                          />
+                        </View>
+                      </View>
+                    </View>
+
                     <View style={styles.inputGroup}>
                       <Text style={styles.label}>Email Address</Text>
                       <View style={styles.inputField}>
@@ -76,18 +110,11 @@ export default function LoginScreen() {
                     </View>
 
                     <View style={styles.inputGroup}>
-                      <View style={styles.labelRow}>
-                        <Text style={styles.label}>Password</Text>
-                        <TouchableOpacity onPress={handleForgotPassword}>
-                          <Text style={styles.forgotPassword}>
-                            Forgot Password?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
+                      <Text style={styles.label}>Password</Text>
                       <View style={styles.inputField}>
                         <TextInput
                           style={[styles.textInput, styles.passwordInput]}
-                          placeholder="Enter your password"
+                          placeholder="Create a password"
                           placeholderTextColor="#C8C8C8"
                           value={password}
                           onChangeText={setPassword}
@@ -105,27 +132,48 @@ export default function LoginScreen() {
                         </TouchableOpacity>
                       </View>
                     </View>
+
+                    <View style={styles.inputGroup}>
+                      <Text style={styles.label}>Confirm Password</Text>
+                      <View style={styles.inputField}>
+                        <TextInput
+                          style={[styles.textInput, styles.passwordInput]}
+                          placeholder="Confirm your password"
+                          placeholderTextColor="#C8C8C8"
+                          value={confirmPassword}
+                          onChangeText={setConfirmPassword}
+                          secureTextEntry={!showConfirmPassword}
+                        />
+                        <TouchableOpacity
+                          style={styles.eyeIcon}
+                          onPress={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          <Ionicons
+                            name={showConfirmPassword ? "eye-off" : "eye"}
+                            size={18}
+                            color="#C8C8C8"
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
                   </View>
 
                   <TouchableOpacity
-                    style={styles.loginButton}
-                    onPress={handleLogin}
+                    style={styles.signUpButton}
+                    onPress={handleSignUp}
                   >
-                    <Text style={styles.loginButtonText}>Login</Text>
+                    <Text style={styles.signUpButtonText}>Create Account</Text>
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
 
-            <TouchableOpacity onPress={handleSignUp}>
-              <Text style={styles.signUpText}>
-                Don't you have an account?{" "}
-                <Link
-                  style={styles.signUpLink}
-                  href="/signup"
-                >
-                  Sign up
-                </Link>
+            <TouchableOpacity onPress={handleLogin}>
+              <Text style={styles.loginText}>
+                Already have an account?{" "}
+                <Text style={styles.loginLink}>Sign in</Text>
               </Text>
             </TouchableOpacity>
           </View>
@@ -159,7 +207,7 @@ const styles = StyleSheet.create({
     paddingTop: 44,
     minHeight: 756,
   },
-  loginForm: {
+  signUpForm: {
     width: 327,
     backgroundColor: "#FFFFFF",
     borderRadius: 23,
@@ -188,7 +236,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: 279,
-    gap: 50,
+    gap: 40,
   },
   intro: {
     width: 279,
@@ -222,6 +270,26 @@ const styles = StyleSheet.create({
   inputsContainer: {
     width: 279,
     gap: 18,
+  },
+  nameRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: 279,
+    gap: 12,
+  },
+  nameInputGroup: {
+    flex: 1,
+    gap: 8,
+  },
+  nameInputField: {
+    height: 42,
+    borderWidth: 1,
+    borderColor: "#DCDCDC",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   inputGroup: {
     width: 279,
@@ -265,19 +333,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  labelRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-  },
-  forgotPassword: {
-    fontFamily: "PlusJakartaSans",
-    fontSize: 12,
-    lineHeight: 18,
-    color: "#2256CB",
-  },
-  loginButton: {
+  signUpButton: {
     width: 279,
     height: 46,
     backgroundColor: "#2256CB",
@@ -287,13 +343,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 14,
   },
-  loginButtonText: {
+  signUpButtonText: {
     fontFamily: "PlusJakartaSans",
     fontSize: 12,
     lineHeight: 18,
     color: "#FFFFFF",
   },
-  signUpText: {
+  loginText: {
     fontFamily: "PlusJakartaSans",
     fontSize: 12,
     lineHeight: 18,
@@ -302,7 +358,7 @@ const styles = StyleSheet.create({
     width: 279,
     marginTop: 12,
   },
-  signUpLink: {
+  loginLink: {
     color: "#2256CB",
   },
   footer: {
