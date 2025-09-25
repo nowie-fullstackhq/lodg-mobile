@@ -8,7 +8,7 @@ import { useEffect } from "react";
 SplashScreen.preventAutoHideAsync();
 
 const isLoggedIn = true;
-const hasSubscription = false;
+const hasSubscription = true;
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({

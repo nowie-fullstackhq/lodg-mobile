@@ -71,7 +71,7 @@ export default function SettingsScreen() {
         />
       ),
       title: "Account Profile",
-      route: "/how-it-works",
+      route: "/profile",
     },
     {
       id: "4",
